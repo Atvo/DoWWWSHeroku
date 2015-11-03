@@ -13,7 +13,13 @@ https://docs.djangoproject.com/en/1.8/ref/settings/
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
 
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+BASE_DIR = os.path.dirname(__file__) # this is not Django setting.
+DATABASE_URL = 'postgresql:///postgresql'
+# TEMPLATE_DIRS = (
+#     os.path.join(BASE_DIR, "templates"),
+#     # here you can add another templates directory if you wish.
+# )
+#print(TEMPLATE_DIRS)
 
 
 # Quick-start development settings - unsuitable for production
@@ -24,6 +30,7 @@ SECRET_KEY = 'xm_newsyqx527bq9r&0&gq0ww%)#&897n%-!ez6$ko5cb#y9_d'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
+#TEMPLATE_DEBUG = DEBUG
 
 ALLOWED_HOSTS = []
 
@@ -55,7 +62,7 @@ ROOT_URLCONF = 'hellodjango.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, "templates")],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -76,8 +83,10 @@ WSGI_APPLICATION = 'hellodjango.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'postgres',
+        'USER': 'atro',
+        'PASSWORD': '1234',
     }
 }
 
@@ -103,7 +112,7 @@ STATIC_URL = '/static/'
 
 # Parse database configuration from $DATABASE_URL
 import dj_database_url
-DATABASES['default'] =  dj_database_url.config()
+DATABASES = {'default': dj_database_url.config(default=DATABASE_URL)}
 
 # Honor the 'X-Forwarded-Proto' header for request.is_secure()
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
@@ -113,10 +122,12 @@ ALLOWED_HOSTS = ['*']
 
 # Static asset configuration
 import os
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-STATIC_ROOT = 'staticfiles'
+#BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+STATIC_ROOT = 'static'
 STATIC_URL = '/static/'
 
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),
 )
+print(dj_database_url.config())
+#reg = 42/0
