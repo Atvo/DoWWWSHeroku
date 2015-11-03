@@ -15,11 +15,16 @@ Including another URLconf
 """
 from django.conf.urls import patterns, include, url
 from django.contrib import admin
+from dowwws import views
 
 
 urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^', include('dowwws.urls')),
+    url(r'^$|^index/$', views.index),
+    url(r'^product/$', views.product),
+    url(r'^contact/$', views.contact),
+    url(r'^contact/new_question/$', views.newQuestion),
+    url(r'^travelguide/$', views.travelguide),
 )
 # urlpatterns = ['',
 #     url(r'^admin/', include(admin.site.urls)),

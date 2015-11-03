@@ -44,6 +44,7 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'dowwws',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -84,9 +85,6 @@ WSGI_APPLICATION = 'hellodjango.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'postgres',
-        'USER': 'atro',
-        'PASSWORD': '1234',
     }
 }
 
@@ -129,5 +127,5 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),
 )
-print(dj_database_url.config())
+print(INSTALLED_APPS)
 #reg = 42/0
