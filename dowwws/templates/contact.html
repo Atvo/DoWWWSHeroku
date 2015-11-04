@@ -19,7 +19,8 @@
             <h3>Send us a Message</h3>
             <form name="sentMessage" id="contactForm" novalidate method="post" action="/contact/new_question/">
                 {% csrf_token %}
-                <div class="control-group form-group">
+                {{ form }}
+                <!--<div class="control-group form-group">
                     <div class="controls">
                         <label>Full Name:</label>
                         <input type="text" class="form-control" id="name" required data-validation-required-message="Please enter your name.">
@@ -37,7 +38,7 @@
                         <label>Question:</label>
                         <textarea rows="10" cols="100" class="form-control" id="message" required data-validation-required-message="Please enter your question" maxlength="999" style="resize:none"></textarea>
                     </div>
-                </div>
+                </div> -->
                 <div id="success"></div>
                 <!-- For success/fail messages -->
                 <button type="submit" class="btn btn-primary">Send Message</button>
