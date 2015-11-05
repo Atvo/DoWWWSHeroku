@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load spacify %}
 {% block content %}
 <div class="container">
 
@@ -12,7 +13,7 @@
                     <p>{{question.answer}}</p>
                     <p>{{question.name}}</p>
                     <p>{{question.email}}</p>
-                    <input name="message" value={{question.message}} style="visibility:hidden"></input>
+                    <input name="message" value={{question.message|spacify}} style="visibility:hidden"></input>
                     <p>{{question.message}}</p>
                     <p>{{question.postDate}}</p>
                     <p>{{question.isPublished}}</p>
