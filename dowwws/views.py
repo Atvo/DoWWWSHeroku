@@ -24,6 +24,7 @@ def contact(request):
 	context = RequestContext(request)
 	context['approvedQuestions'] = Question.objects.all()
 	context['form'] = QuestionForm()
+	print(context)
 	return render_to_response('contact.html', context)
 
 def travelguide(request):
@@ -47,4 +48,4 @@ def newQuestion(request):
 				# new_game.ratingPoints = 0
 				# new_game.rates = 0
 				# new_game.save()
-		contact(request)
+		return contact(request)

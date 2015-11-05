@@ -23,6 +23,7 @@ urlpatterns = patterns('',
     url(r'^$|^index/$', views.index),
     url(r'^product/$', views.product),
     url(r'^contact/$', views.contact),
+    url(r'^moderate/$', views.moderate),
     url(r'^contact/new_question/$', views.newQuestion),
     url(r'^travelguide/$', views.travelguide),
 )
