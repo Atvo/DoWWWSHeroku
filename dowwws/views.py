@@ -27,6 +27,14 @@ def contact(request):
 	print(context)
 	return render_to_response('contact.html', context)
 
+def moderate(request):
+	print("moderate")
+	context = RequestContext(request)
+	context['approvedQuestions'] = Question.objects.all()
+	context['form'] = QuestionForm()
+	print(context)
+	return render_to_response('moderate.html', context)
+
 def travelguide(request):
 	print("travelguide")
 	context = RequestContext(request)
