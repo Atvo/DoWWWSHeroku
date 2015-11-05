@@ -6,11 +6,18 @@
     <div class="row">
         <div class="col-md-8">
             {% for question in approvedQuestions %}
-            <p>{{question.title}}</p>
-            <p>{{question.answer}}</p>
+                <p>{{question.title}}</p>
+                <p>{{question.answer}}</p>
+                <p>{{question.name}}</p>
+                <p>{{question.email}}</p>
+                <p>{{question.message}}</p>
+                <p>{{question.postDate}}</p>
+                <p>{{question.isPublished}}</p>
+                <br>
             {% endfor %}
         </div>
     </div>
+    <p> {{ approvedQuestions|length }} </p>
     <!-- Contact Form -->
     <!-- In order to set the email address and subject line for the contact form go to the bin/contact_me.php file. -->
 

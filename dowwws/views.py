@@ -22,6 +22,7 @@ def product(request):
 def contact(request):
 	print("contact")
 	context = RequestContext(request)
+	context['approvedQuestions'] = Question.objects.all()
 	context['form'] = QuestionForm()
 	return render_to_response('contact.html', context)
 
@@ -46,4 +47,4 @@ def newQuestion(request):
 				# new_game.ratingPoints = 0
 				# new_game.rates = 0
 				# new_game.save()
-		return render_to_response('contact.html', context)
+		contact(request)
