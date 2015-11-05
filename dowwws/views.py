@@ -59,15 +59,10 @@ def newReply(request):
 		form = QuestionForm(data=request.POST)
 		#newQuestion = form.save(commit=False)
 		postMessage = request.POST.get('message')
-		print("Message: " + postMessage)
 		querySet = Question.objects.all()
-		print(querySet)
 		querySet = querySet.filter(message = postMessage.replace(u'\xa0', u' '))
-		print(querySet)
 		question = querySet[0]
-		print(question)
 		postAnswer = request.POST.get('answer')
-		print("Answer: " + postAnswer)
 		question.answer = postAnswer
 		question.isPublished = True
 		question.save()
