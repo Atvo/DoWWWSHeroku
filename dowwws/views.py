@@ -22,7 +22,7 @@ def product(request):
 def contact(request):
 	print("contact")
 	context = RequestContext(request)
-	context['approvedQuestions'] = Question.objects.all()
+	context['publishedQuestions'] = Question.objects.all().filter(isPublished=True)
 	context['form'] = QuestionForm()
 	print(context)
 	return render_to_response('contact.html', context)
@@ -30,7 +30,7 @@ def contact(request):
 def moderate(request):
 	print("moderate")
 	context = RequestContext(request)
-	context['approvedQuestions'] = Question.objects.all()
+	context['approvedQuestions'] = Question.objects.all().filter(isPublished=False)
 	context['form'] = QuestionForm()
 	print(context)
 	return render_to_response('moderate.html', context)
@@ -50,10 +50,20 @@ def newQuestion(request):
 		# newQuestion.clientEmail = request.POST.get('email')
 		# newQuestion.question = request.POST.get('message')
 		newQuestion.save()
-				# new_game = storegame_form.save(commit=False)
-				# new_game.author = username
-				# new_game.lastPlayed = ""
-				# new_game.ratingPoints = 0
-				# new_game.rates = 0
-				# new_game.save()
 		return contact(request)
+
+def newReply(request):
+	print("newReply")
+	if request.method == 'POST':
+		context = RequestContext(request)
+		form = QuestionForm(data=request.POST)
+		#newQuestion = form.save(commit=False)
+		postMessage = request.POST.get('message')
+		print(postMessage)
+		question = Question.objects.all().filter(message = postMessage)[0]
+		postAnswer = request.POST.get('answer')
+		print(postAnswer)
+		question.answer = postAnswer
+		question.isPublished = True
+		question.save()
+		return moderate(request)

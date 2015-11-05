@@ -25,6 +25,7 @@ urlpatterns = patterns('',
     url(r'^contact/$', views.contact),
     url(r'^moderate/$', views.moderate),
     url(r'^contact/new_question/$', views.newQuestion),
+    url(r'^moderate/reply_question/$', views.newReply),
     url(r'^travelguide/$', views.travelguide),
 )
 # urlpatterns = ['',
