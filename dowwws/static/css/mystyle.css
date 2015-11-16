@@ -37,7 +37,7 @@ text-align: right;
 	background:green;
 	transition:background 2s ease;
 }
-#mycard{
+.mycard{
   padding-top:10px;
 
 }
