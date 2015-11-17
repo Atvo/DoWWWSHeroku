@@ -59,3 +59,13 @@ text-align: right;
   padding-right:10px;
   margin: 3px;
 }
+/*.component{
+  margin:0px;
+}*/
+.well{
+  margin-top: -23px;
+  background-color: #ccccb3;
+}
+#markerList{
+  list-style: circle;
+}
