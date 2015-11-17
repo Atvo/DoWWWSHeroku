@@ -35,7 +35,7 @@
                 <a role="button" data-toggle="collapse" data-parent="#accordion" href={{ "#"|add:"collapse"|add:question.message|wsstrip }} aria-expanded="false" aria-controls={{ "collapse"|add:question.message|wsstrip }} style="color: #333;">
                   <div class="panel-heading" role="tab" id={{ "heading"|add:question.message|wsstrip }}>
                     <h4 class="panel-title">    
-                        {{question.message}} <small id="time">{{question.postDate}}</small>
+                        {{question.title}} <small id="time">{{question.postDate}}</small>
                     </h4>
                   </div>
                   </a>
@@ -73,10 +73,19 @@
                                <input type="tel" class="form-control" id="telnum" name="telnum" placeholder="Tel. number">
                    </div>
                </div>
+
                <div class="form-group">
                    <label for="emailid" class="col-sm-2 control-label">Email</label>
                    <div class="col-sm-10">
                        <input type="email" class="form-control" id="emailid" name="emailid" placeholder="Email">
+                   </div>
+               </div>
+
+               <div class="form-group">
+                   <label for="title" class="col-xs-12 col-sm-2 control-label">Title of the question</label>
+
+                   <div class="col-xs-12 col-sm-10 ">
+                               <input type="text" class="form-control" id="title" name="title" placeholder="Title of your question">
                    </div>
                </div>
 

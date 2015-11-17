@@ -54,7 +54,8 @@ def newQuestion(request):
 		firstName = arr[1].split("=")[1].replace("+", " ").replace("%40", "@")
 		telNum = arr[2].split("=")[1].replace("+", " ").replace("%40", "@")
 		email = arr[3].split("=")[1].replace("+", " ").replace("%40", "@")
-		question = arr[4].split("=")[1].replace("+", " ").replace("%40", "@")
+		title = arr[4].split("=")[1].replace("+", " ").replace("%40", "@")
+		question = arr[5].split("=")[1].replace("+", " ").replace("%40", "@")
 
 		newQuestion.name = firstName #request.POST.get('name')
 		print(firstName)
@@ -62,6 +63,8 @@ def newQuestion(request):
 		print(email)
 		newQuestion.message = question #request.POST.get('message')
 		print(question)
+		newQuestion.title = title #request.POST.get('message')
+		print(title)
 		newQuestion.save()
 		return contact(request)
 
