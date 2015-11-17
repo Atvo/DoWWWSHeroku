@@ -1,10 +1,10 @@
 
 // Global Variables
 var rootLatLng = {lat: 60.187, lng: 24.820};
-var locations = [{coord: rootLatLng, desc: "TUAS-Building", winter: true, summer: true},
-    {coord: {lat: 60.192, lng: 24.820}, desc: "random point 1", winter: true, summer: false},
-    {coord: {lat: 60.187, lng: 24.830}, desc: "random point 2", winter: false, summer: false},
-    {coord: {lat: 60.192, lng: 24.830}, desc: "random point 3", winter: false, summer: true}];
+var locations = [{coord: rootLatLng, desc: "TUAS-Building", active: false, winter: true, summer: true},
+    {coord: {lat: 60.192, lng: 24.820}, desc: "random point 1", active: false, winter: true, summer: false},
+    {coord: {lat: 60.187, lng: 24.830}, desc: "random point 2", active: false, winter: false, summer: false},
+    {coord: {lat: 60.192, lng: 24.830}, desc: "random point 3", active: false, winter: false, summer: true}];
 var map;
 var markers = [];
 var summerFilter = false;
@@ -44,17 +44,9 @@ function initMap() {
 }
 
 function initFilters() {
-  console.log("joujaa");
 
   var filterElement = $("#locationFilter");
 
-  filterElement.prepend("<p id='toggle'>Toggle</p>");
-  filterElement.prepend("<p id='HELLUREI'>HELLUREI</p>");
-
-  var markerList = $("#markerList");
-  for (var i = 0; i < locations.length; i++) {
-    markerList.append("<li id='locationElement" + i + "'>" + locations[i].desc + "</li>");
-  }
 
   $("#toggle").click(function() {
     $("#HELLUREI").toggle();
@@ -107,6 +99,7 @@ function updateMarkers() {
     if (location.summer == true) {
       console.log("summerFilter");
       if (summerFilter == true) {
+        location.active = true;
         marker.setMap(map);
         continue;
       }
@@ -114,13 +107,27 @@ function updateMarkers() {
     if (location.winter == true) {
       console.log("winterFilter");
       if (winterFilter == true) {
+        location.active = true;
         marker.setMap(map);
         continue;
       }
     }
+    location.active = false;
     marker.setMap(null);
   }
+  updateLocationList();
 
+}
+
+function updateLocationList() {
+  var markerList = $("#markerList");
+  markerList.html("");
+  for (var i = 0; i < locations.length; i++) {
+    var location = locations[i];
+    if (location.active === true) {
+      markerList.append("<li id='locationElement" + i + "'>" + location.desc + "</li>");
+    }
+  }
 }
 
 //initMap();

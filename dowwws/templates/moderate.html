@@ -71,49 +71,35 @@
    <div class="row row-content">
      <div class="row">
          <div class="col-md-10">
+           <div class="panel-group" id="accordion"
+                  role="tablist" aria-multiselectable="true">
              {% for question in approvedQuestions %}
-                 <form name="answerQuestion" novalidate>
-                     {% csrf_token %}
-                     <div class="panel-group" id="accordion"
-                            role="tablist" aria-multiselectable="true">
-                            <div class="panel panel-default">
-                              <div class="panel-heading" role="tab" id="{{question.name}}">
-                                  <h3 class="panel-title">
-                                    <a role="button" data-toggle="collapse"
-                                         data-parent="#accordion" href="#{{question.name}}"
-                                         aria-expanded="true" aria-controls="{{question.name}}">
-                                 {{question.name}}<small id="baner">  {{question.title}} {{question.email}} {{question.answer}} {{question.postDate}} {{question.isPublished}}</small></a>
-                               </h3>
-                             </div>
-                             <div role="tabpanel" class="panel-collapse collapse in"
-                                  id="{{question.name}}"    aria-labelledby="{{question.name}}">
-                                 <div class="panel-body">
-
-
-
-                     <input name="message" value={{question.message|spacify}} style="visibility:hidden"></input>
-                     <p>{{question.message}}</p>
-
-
-
-                     <div class="col-xs-12 col-sm-2">
-                          <form class="form-horizontal" role="form">
-
-                               <div class="col-sm-offset-2 col-sm-10">
-                           <a data-toggle="modal" data-target="{{ '#'|add:'replyForm'|add:question.message|wsstrip }}"><button type="submit" class="btn btn-primary">Reply</button></a>
-                                 </div>
-
-
-
-                         </form>
-                     </div>
-                   </div>
+                <div class="panel panel-default">
+                  <a role="button" data-toggle="collapse" data-parent="#accordion" href={{ "#"|add:"collapse"|add:question.message|wsstrip }} aria-expanded="false" aria-controls={{ "collapse"|add:question.message|wsstrip }}>
+                    <div class="panel-heading" role="tab" id={{ "heading"|add:question.message|wsstrip }} style="color: #333;">
+                      <h4 class="panel-title">
+                          {{ question.message }}
+                      </h4>
                     </div>
-                </div>
-              </div>
-                 </form>
-                 <br>
+                  </a>
+                    <div id={{ "collapse"|add:question.message|wsstrip }} class="panel-collapse collapse" role="tabpanel" aria-labelledby={{ "heading"|add:question.message|wsstrip }}>
+                      <div class="panel-body">
+                        <form name="answerQuestion" novalidate>
+                          {% csrf_token %}
+                          {{ question.message }}
+                        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                        <br></br>
+                          <form class="form-horizontal" role="form">
+                             <div class="col-sm-offset-1 col-sm-10">
+                               <a data-toggle="modal" data-target="{{ '#'|add:'replyForm'|add:question.message|wsstrip }}"><button type="submit" class="btn btn-primary">Reply</button></a>
+                             </div>
+                         </form>
+                        </form>
+                      </div>
+                    </div>
+                  </div>
              {% endfor %}
+          </div>
          </div>
      </div>
 

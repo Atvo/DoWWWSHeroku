@@ -1,31 +1,13 @@
 {% extends "base.html" %}
 {% load spacify %}
+{% load wsstrip %}
 {% block content %}
 
-         <!--form class="form-inline">
-                      <div class="form-group">
-                        <input type="email" class="form-control input-sm" placeholder="email" >
-
-
-                        <input type="password" class="form-control input-sm" placeholder="password" >
-                    </div>
-
-                     <div class="checkbox">
-                        <label><input class="form-control" type="checkbox">Remember me</label>
-                    </div>
-
-
-                       <button type="submit"  class="btn btn-info btn-sm">Sign in</button>
-
-                    <button type="button" class="btn btn-default btn-sm"
-                   data-dismiss="modal">Cancel</button>
-
-                </form-->
  <div class="container">
 
 
 
-   <div class="row row-content">
+   <!--div class="row row-content">
      <div class="mycard">
       <div class="col-sm-9 ">
         {% for question in publishedQuestions %}
@@ -42,6 +24,34 @@
      {% endfor %}
     </div>
     </div>
+  </div-->
+  <div class="row row-content">
+   <div class="mycard">
+    <div class="col-sm-9 ">
+      <div class="panel-group" id="accordion"
+                role="tablist" aria-multiselectable="true">
+           {% for question in publishedQuestions %}
+              <div class="panel panel-default">
+                <a role="button" data-toggle="collapse" data-parent="#accordion" href={{ "#"|add:"collapse"|add:question.message|wsstrip }} aria-expanded="false" aria-controls={{ "collapse"|add:question.message|wsstrip }} style="color: #333;">
+                  <div class="panel-heading" role="tab" id={{ "heading"|add:question.message|wsstrip }}>
+                    <h4 class="panel-title">    
+                        {{question.message}} <small id="time">{{question.postDate}}</small>
+                    </h4>
+                  </div>
+                  </a>
+                  <div id={{ "collapse"|add:question.message|wsstrip }} class="panel-collapse collapse" role="tabpanel" aria-labelledby={{ "heading"|add:question.message|wsstrip }}>
+                    <div class="panel-body">
+                      {{question.answer}}
+                    </div>
+                  </div>
+                </div>
+           {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+
+
 
       <div class="col-xs-12 ">
          <h3 >Send us a Message</h3>

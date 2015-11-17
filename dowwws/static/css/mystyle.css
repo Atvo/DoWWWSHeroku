@@ -33,10 +33,10 @@
 color:#191A00;
 text-align: right;
 }
-#accordion {
+/*#accordion {
 	background:green;
 	transition:background 2s ease;
-}
+}*/
 .mycard{
   padding-top:10px;
 
@@ -58,4 +58,8 @@ text-align: right;
   float:right;
   padding-right:10px;
   margin: 3px;
+}
+
+.panel-heading{
+  background-color: #e0e0d1;
 }
