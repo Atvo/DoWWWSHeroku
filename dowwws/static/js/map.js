@@ -60,9 +60,15 @@ function initFilters() {
   $("#markerList").click(function(event) {
     console.log("markerList click");
     var target = $(event.target);
-    var index = target.index();
-    var marker = markers[index];
-    marker.setMap(map);
+    var index = target.index(); // This index references to the list in HTML not the location list
+    locLat = locations[index].coord.lat;
+    locLng = locations[index].coord.lng;
+    var locCoord = new google.maps.LatLng(locLat, locLng);
+    map.panTo(locCoord);
+    map.setZoom(11);
+
+    //var marker = markers[index];
+    //marker.setMap(map);
   });
 
   $("#summerChx").click(function() {
