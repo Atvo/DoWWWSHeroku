@@ -78,7 +78,7 @@
                   <a role="button" data-toggle="collapse" data-parent="#accordion" href={{ "#"|add:"collapse"|add:question.message|wsstrip }} aria-expanded="false" aria-controls={{ "collapse"|add:question.message|wsstrip }}>
                     <div class="panel-heading" role="tab" id={{ "heading"|add:question.message|wsstrip }} style="color: #333;">
                       <h4 class="panel-title">
-                          {{ question.message }}
+                          {{ question.title }} <small id="time">{{question.postDate}}</small>
                       </h4>
                     </div>
                   </a>
@@ -87,7 +87,6 @@
                         <form name="answerQuestion" novalidate>
                           {% csrf_token %}
                           {{ question.message }}
-                        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
                         <br></br>
                           <form class="form-horizontal" role="form">
                              <div class="col-sm-offset-1 col-sm-10">

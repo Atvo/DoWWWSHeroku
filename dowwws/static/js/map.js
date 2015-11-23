@@ -2,9 +2,11 @@
 // Global Variables
 var rootLatLng = {lat: 60.187, lng: 24.820};
 var locations = [{coord: rootLatLng, desc: "TUAS-Building", active: false, winter: true, summer: true},
-    {coord: {lat: 60.192, lng: 24.820}, desc: "random point 1", active: false, winter: true, summer: false},
-    {coord: {lat: 60.187, lng: 24.830}, desc: "random point 2", active: false, winter: false, summer: false},
-    {coord: {lat: 60.192, lng: 24.830}, desc: "random point 3", active: false, winter: false, summer: true}];
+    {coord: {lat: 60.220, lng: 24.865}, desc: "Strömbergin puisto", active: false, winter: true, summer: true},
+    {coord: {lat: 60.258, lng: 24.603}, desc: "Sorlammen luontopolku", active: false, winter: false, summer: true},
+    {coord: {lat: 60.294, lng: 24.558}, desc: "Päivättärenpolku", active: false, winter: true, summer: true},
+    {coord: {lat: 60.242, lng: 24.656}, desc: "Oittaan luontopolku", active: false, winter: true, summer: false},
+    {coord: {lat: 60.188, lng: 24.813}, desc: "Laajalahden luontopolku", active: false, winter: false, summer: true},];
 var map;
 var markers = [];
 var summerFilter = false;
@@ -16,7 +18,7 @@ function initMap() {
   map = new google.maps.Map(document.getElementById('gMap'), {
     center: rootLatLng,
     scrollwheel: true,
-    zoom: 14
+    zoom: 10
   });
 
   // Create a marker and set its position.

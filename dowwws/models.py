@@ -2,6 +2,7 @@ from django.db import models
 
 class Question(models.Model):
 	name = models.CharField(null=False,blank=False, max_length=255) # The name of the client
+	title = models.CharField(null=False,blank=False, max_length=255, default="No Title") # The title of the question
 	email = models.CharField(null=False,blank=False, max_length=255) # The name of the client
 	message = models.TextField(null=False, blank=False) # The Question
 	answer = models.TextField(null=False, blank=False, default="Not answered yet") # The Question
