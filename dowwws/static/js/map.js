@@ -29,6 +29,9 @@ function initMap() {
       title: title
     });
     markers.push(marker);
+    var dist = calculateDistance(locations[0], locations[i]);
+    console.log("coord1: " + "0" + ", coord2: " + i);
+    console.log("Distance: " + dist);
 
     var infowindow = new google.maps.InfoWindow();
     var content = locations[i].desc + ", summer: " + locations[i].summer + ", winter: " + locations[i].winter;
@@ -127,6 +130,25 @@ function updateLocationList() {
     if (location.active === true) {
       markerList.append("<li id='locationElement" + i + "'>" + location.desc + "</li>");
     }
+  }
+}
+
+function calculateDistance(coord1, coord2) {
+  var R = 6371; // Radius of the earth in km
+  var dLat = (coord1.coord.lat-coord2.coord.lat).toRad();  // Javascript functions in radians
+  var dLon = (coord1.coord.lng-coord2.coord.lng).toRad(); 
+  var a = Math.sin(dLat/2) * Math.sin(dLat/2) +
+          Math.cos(coord1.coord.lat.toRad()) * Math.cos(coord2.coord.lat.toRad()) * 
+          Math.sin(dLon/2) * Math.sin(dLon/2); 
+  var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
+  var d = R * c;
+  return d;
+
+}
+
+if (typeof(Number.prototype.toRad) === "undefined") {
+  Number.prototype.toRad = function() {
+    return this * Math.PI / 180;
   }
 }
 
