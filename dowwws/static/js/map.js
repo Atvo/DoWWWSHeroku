@@ -1,12 +1,17 @@
 
 // Global Variables
+var activities = ["Hiking", "Kayaking", "Swimming", "Skiing"]
+var activeActivities = [];
+
 var rootLatLng = {lat: 60.187, lng: 24.820};
-var locations = [{coord: rootLatLng, desc: "TUAS-Building", active: false, winter: true, summer: true},
-    {coord: {lat: 60.220, lng: 24.865}, desc: "Strömbergin puisto", active: false, winter: true, summer: true},
-    {coord: {lat: 60.258, lng: 24.603}, desc: "Sorlammen luontopolku", active: false, winter: false, summer: true},
-    {coord: {lat: 60.294, lng: 24.558}, desc: "Päivättärenpolku", active: false, winter: true, summer: true},
-    {coord: {lat: 60.242, lng: 24.656}, desc: "Oittaan luontopolku", active: false, winter: true, summer: false},
-    {coord: {lat: 60.188, lng: 24.813}, desc: "Laajalahden luontopolku", active: false, winter: false, summer: true},];
+var locations = [
+    {coord: {lat: 60.220, lng: 24.865}, activityList: [0, 1, 0, 0], desc: "Strömbergin puisto", active: false},
+    {coord: {lat: 60.258, lng: 24.603}, activityList: [0, 0, 1, 0], desc: "Sorlammen luontopolku", active: false},
+    {coord: {lat: 60.294, lng: 24.558}, activityList: [0, 1, 1, 1], desc: "Päivättärenpolku", active: false},
+    {coord: {lat: 60.242, lng: 24.656}, activityList: [1, 0, 0, 0], desc: "Oittaan luontopolku", active: false},
+    {coord: {lat: 60.188, lng: 24.813}, activityList: [0, 1, 0, 1], desc: "Laajalahden luontopolku", active: false},
+    ];
+var activeLocations = []
 var map;
 var markers = [];
 var summerFilter = false;
@@ -32,8 +37,6 @@ function initMap() {
     });
     markers.push(marker);
     var dist = calculateDistance(locations[0], locations[i]);
-    console.log("coord1: " + "0" + ", coord2: " + i);
-    console.log("Distance: " + dist);
 
     var infowindow = new google.maps.InfoWindow();
     var content = locations[i].desc + ", summer: " + locations[i].summer + ", winter: " + locations[i].winter;
@@ -48,40 +51,53 @@ function initMap() {
   };  
 }
 
+function initActivities() {
+  console.log("initActivities");
+
+  for (var i = 0; i < activities.length; i++) {
+    var activity = activities[i];
+    activeActivities.push({name: activity, active: false});
+  }
+}
+
 function initFilters() {
+  console.log("initFilters");
 
   var filterElement = $("#locationFilter");
 
-
-  $("#toggle").click(function() {
-    $("#HELLUREI").toggle();
-  });
+  // Create Checkboxes in to locationForm
+  var locationForm = $("#locationForm");
+  for (var i = 0; i < activities.length; i++) {
+    var activity = activities[i];
+    locationForm.append("<input id='" + activity + "Chx' type='checkbox' name='activity' value='" + activity + "'><label class='checkbox inline'>&nbsp;" + activity + "</label><br>");
+  }
 
   $("#markerList").click(function(event) {
     console.log("markerList click");
     var target = $(event.target);
-    var index = target.index(); // This index references to the list in HTML not the location list
-    locLat = locations[index].coord.lat;
-    locLng = locations[index].coord.lng;
+    var index = target.index();
+    locLat = activeLocations[index].coord.lat;
+    locLng = activeLocations[index].coord.lng;
     var locCoord = new google.maps.LatLng(locLat, locLng);
     map.panTo(locCoord);
     map.setZoom(11);
-
-    //var marker = markers[index];
-    //marker.setMap(map);
   });
 
-  $("#summerChx").click(function() {
-    summerFilter = $("#summerChx").prop("checked");
-    console.log(summerFilter);
-    updateMarkers();
-  });
+  // Create Listeners for activities
+  console.log("Create Listeners");
 
-  $("#winterChx").click(function() {
-    winterFilter = $("#winterChx").prop("checked");
-    console.log(winterFilter);
-    updateMarkers();
-  });
+  function generateListener(j, selectorStr) {
+    return function(event) {
+      activeActivities[j].active = $(selectorStr).prop("checked");
+      updateMarkers();
+    };
+  }
+
+  for (var i = 0; i < activities.length; i++) {
+    var activity = activities[i];
+    var selectorStr = "#" + activity + "Chx";
+    $(selectorStr).click(generateListener(i, selectorStr));
+  }
 }
 
 // Sets the map on all markers in the array.
@@ -103,40 +119,35 @@ function showMarkers(locations) {
 
 
 function updateMarkers() {
+
   for (var i = 0; i < markers.length; i++) {
     var marker = markers[i];
     var location = locations[i];
-    console.log(marker);
-    if (location.summer == true) {
-      console.log("summerFilter");
-      if (summerFilter == true) {
-        location.active = true;
-        marker.setMap(map);
-        continue;
-      }
-    }
-    if (location.winter == true) {
-      console.log("winterFilter");
-      if (winterFilter == true) {
-        location.active = true;
-        marker.setMap(map);
-        continue;
-      }
-    }
     location.active = false;
     marker.setMap(null);
+    for (var j = 0; j < activities.length; j++) {
+      var activity = activities[j];
+      if (activeActivities[j].active && location.activityList[j] == 1) {
+        location.active = true;
+        marker.setMap(map);
+      }
+    }
   }
   updateLocationList();
 
 }
 
 function updateLocationList() {
+  activeLocations = []
   var markerList = $("#markerList");
   markerList.html("");
+  var idx = 0
   for (var i = 0; i < locations.length; i++) {
     var location = locations[i];
     if (location.active === true) {
+      activeLocations[idx] = location;
       markerList.append("<li id='locationElement" + i + "'>" + location.desc + "</li>");
+      idx += 1;
     }
   }
 }
@@ -161,4 +172,5 @@ if (typeof(Number.prototype.toRad) === "undefined") {
 }
 
 //initMap();
+initActivities();
 initFilters();

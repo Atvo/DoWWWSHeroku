@@ -36,10 +36,23 @@
 
       <form class="form-horizontal answerForm" role="form">
                 <div class="row">
-                    <div class="col-sm-10 col-sm-offset-1">
+                 <div class="form-group">
+                    <div class="col-sm-2 control-label col-sm-offset-1">
+                      Question:
+                    </div>
+                    <div class="col-sm-8">
                         {{ question.message }}
                         <input name="message" value={{question.message|spacify}} style="visibility:hidden"></input>
                     </div>
+                </div>
+                </div>
+                <div class="row">
+                 <div class="form-group">
+                   <label for="title" class="col-sm-2 col-sm-offset-1 control-label">Title</label>
+                    <div class="col-sm-8">
+                   <input type="text" class="form-control" id="title" name="title" placeholder="Give a title to the question">
+                   </div>
+                </div>
                 </div>
                <div class="row">
                  <div class="form-group">
@@ -50,6 +63,27 @@
         </div>
         <div class="row">
         <div class="form-group">
+           <label for="title" class="col-xs-10 col-sm-3 control-label">Publish the answer?</label>
+            {% if question.public %}
+           <div class="col-xs-2 col-sm-1 ">
+                       <input type="checkbox" class="form-control" id="public" name="public" checked="checked">
+           </div>
+           {% else %}
+           <div class="col-xs-2 col-sm-1 ">
+                       <input type="checkbox" class="form-control" id="public" name="public" disabled="disabled" title="The client doesn't allow the question to be public">
+           </div>
+           {% endif %}
+
+           <label for="title" class="col-xs-10 col-sm-3 control-label">Send email?</label>
+           {% if question.emailResponse %}
+           <div class="col-xs-2 col-sm-1 ">
+                       <input type="checkbox" class="form-control" id="emailResponse" name="emailResponse" checked="checked">
+           </div>
+           {% else %}
+           <div class="col-xs-2 col-sm-1 ">
+                       <input type="checkbox" class="form-control" id="emailResponse" name="emailResponse" disabled="disabled" title="The client doesn't allow email response">
+           </div>
+           {% endif %}
             <div class="col-sm-2 col-sm-offset-1">
                 <button type="submit" class="btn btn-primary">Send</button>
             </div>

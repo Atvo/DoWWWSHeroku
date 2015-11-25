@@ -33,7 +33,7 @@
           <div class="panel-heading">
 
 
-            <h3 class="panel-title">Season selector</h3>
+            <h3 class="panel-title">Activity selector</h3>
           </div>
 
         <div class="panel-body">
@@ -43,9 +43,10 @@
             <div id="locationFilter">
 
                 <!--<ul id="markerList"></ul>-->
-                <form class="form-inline"action="">
-                    <input id="summerChx" type="checkbox" name="season" value="summer"><label class="checkbox inline">&nbsp;Summer</label><br>
-                    <input id="winterChx" type="checkbox" name="season" value="winter"><label class="checkbox inline">&nbsp;Winter</label>
+                <form id="locationForm" class="form-inline" action="">
+                    <!-- THIS IS NOW DYNAMICALLY CREATED IN MAP.JS -->
+                    <!--input id="summerChx" type="checkbox" name="season" value="summer"><label class="checkbox inline">&nbsp;Summer</label><br>
+                    <input id="winterChx" type="checkbox" name="season" value="winter"><label class="checkbox inline">&nbsp;Winter</label-->
                 </form>
 
         </div>
@@ -78,5 +79,5 @@
     <!-- /.row -->
 
 </div>
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD80_YxdlsnPmgr8Y3LGjarxY76NSPjGH4&callback=initMap&initFilters" async defer></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD80_YxdlsnPmgr8Y3LGjarxY76NSPjGH4&callback=initMap&initFilters&initActivities" async defer></script>
 {% endblock %}
