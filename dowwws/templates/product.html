@@ -27,6 +27,16 @@
             <p>Our product is a lightweight cushion (PE-foam mat) used for sitting outdoor in harsh environments, like wet, cold and rough surface. The cushion comes with a printed logo or name of a company, event, club etc.  Consectetur, quod, incidunt, harum nisi dolores delectus reprehenderit voluptatem perferendis dicta dolorem non blanditiis ex fugiat.</p>
             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Saepe, magni, aperiam vitae illum voluptatum aut sequi impedit non velit ab ea pariatur sint quidem corporis eveniet. Odit, temporibus reprehenderit dolorum!</p>
             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Et, consequuntur, modi mollitia corporis ipsa voluptate corrupti eum ratione ex ea praesentium quibusdam? Aut, in eum facere corrupti necessitatibus perspiciatis quis?</p>
+
+            <form id="buyForm" class="form-horizontal" role="form" novalidate method="post" action="/product/buy/">
+                {% csrf_token %}
+               <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                       <button type="submit" class="btn btn-primary">Buy!</button>
+                   </div>
+               </div>
+           </form>
+
         </div>
     </div>
     <!-- /.row -->

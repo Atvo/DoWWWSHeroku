@@ -14,3 +14,7 @@ class Question(models.Model):
 
 	def __str__(self):
 		return self.name + "\n" + self.message + "\n" + self.answer
+
+class OrderCount(models.Model):
+	productName = models.CharField(null=False,blank=False, max_length=255) # The name of the product
+	count = models.IntegerField(default=0) # How many orders there are
