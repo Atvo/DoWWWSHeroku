@@ -20,6 +20,23 @@ def product(request):
 	context = RequestContext(request)
 	return render_to_response('product.html', context)
 
+def buy(request):
+	print("Buy")
+	context = RequestContext(request)
+	querySet = OrderCount.objects.all()
+	querySet = querySet.filter(productName = "Sitting Mat");
+	if len(querySet) == 0:
+		newOrderCount = OrderCount(productName = "Sitting Mat", count = 1)
+		newOrderCount.save()
+	else:
+		orderCount = querySet[0]
+		prevCount = orderCount.count
+		orderCount.count = prevCount + 1
+		orderCount.save()
+	return render_to_response('product.html', context)
+
+
+
 def contact(request):
 	print("contact")
 	context = RequestContext(request)
