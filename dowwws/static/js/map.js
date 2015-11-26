@@ -1,5 +1,5 @@
 
-// Global Variables
+// Global Maps Variables
 var activities = ["Hiking", "Kayaking", "Swimming", "Skiing"]
 var activeActivities = [];
 
@@ -17,6 +17,9 @@ var markers = [];
 var summerFilter = false;
 var winterFilter = false;
 
+// Global Places Variables
+var service;
+
 function initMap() {
   console.log("initMap");
   // Create a map object and specify the DOM element for display.
@@ -25,6 +28,8 @@ function initMap() {
     scrollwheel: true,
     zoom: 10
   });
+  service = new google.maps.places.PlacesService(map);
+
 
   // Create a marker and set its position.
   for (var i = 0; i < locations.length; i++) {
@@ -60,6 +65,41 @@ function initActivities() {
   }
 }
 
+function getPlacePhotos(location) {
+  console.log("getPlacePhotos");
+  lat = location.coord.lat;
+  lng = location.coord.lng;
+  var wiggle = 0.002;
+  var url_str = "http://www.panoramio.com/map/get_panoramas.php?set=public&from=0&to=10&minx=" + (lng - wiggle) + "&miny=" + (lat - wiggle) + "&maxx=" + (lng + wiggle) + "&maxy=" + (lat + wiggle) + "&size=medium&mapfilter=true";
+  console.log(url_str);
+  var coord = new google.maps.LatLng(lat,lng);
+  $.ajax({ 
+   type: "GET",
+   dataType: "jsonp",
+   url: url_str,
+   success: function(data){        
+     displayPhotos(data);
+   }
+  });
+}
+
+function displayPhotos(data) {
+  //alert(JSON.stringify(data));
+  //console.log(JSON.stringify(data));
+  //console.log(JSON.stringify(data.photos));
+  console.log(data.photos.length);
+  var el = $("#locationPhotos");
+  el.html("");
+  for (var i = 0; i < data.photos.length; i++) {
+    var photo = data.photos[i]
+    console.log(JSON.stringify(photo));
+    el.append('<div class="col-md-2 col-sm-4 col-xs-6">');
+    el.append('<img class="img-responsive customer-img" src="' + photo.photo_file_url + '" alt="">');
+    el.append('</div>');
+  }
+}
+
+
 function initFilters() {
   console.log("initFilters");
 
@@ -69,7 +109,7 @@ function initFilters() {
   var locationForm = $("#locationForm");
   for (var i = 0; i < activities.length; i++) {
     var activity = activities[i];
-    locationForm.append("<input id='" + activity + "Chx' type='checkbox' name='activity' value='" + activity + "'><label class='checkbox inline'>&nbsp;" + activity + "</label><br>");
+    locationForm.append("<input id='" + activity + "Chx' type='checkbox' name='activity' value='" + activity + "'><label class='checkbox inline' for='" + activity + "Chx'>&nbsp;" + activity + "</label><br>");
   }
 
   $("#markerList").click(function(event) {
@@ -81,22 +121,24 @@ function initFilters() {
     var locCoord = new google.maps.LatLng(locLat, locLng);
     map.panTo(locCoord);
     map.setZoom(11);
+    getPlacePhotos(activeLocations[index]);
   });
 
   // Create Listeners for activities
   console.log("Create Listeners");
 
-  function generateListener(j, selectorStr) {
+  function generateActivityListener(j, selectorStr) {
     return function(event) {
       activeActivities[j].active = $(selectorStr).prop("checked");
       updateMarkers();
+      //getPlacePhotos(locations[j]);
     };
   }
 
   for (var i = 0; i < activities.length; i++) {
     var activity = activities[i];
     var selectorStr = "#" + activity + "Chx";
-    $(selectorStr).click(generateListener(i, selectorStr));
+    $(selectorStr).click(generateActivityListener(i, selectorStr));
   }
 }
 
