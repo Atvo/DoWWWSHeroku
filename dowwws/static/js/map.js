@@ -96,6 +96,7 @@ function displayPhotos(data) {
     el.append('<div class="col-md-2 col-sm-4 col-xs-6">');
     el.append('<img class="img-responsive customer-img" src="' + photo.photo_file_url + '" alt="">');
     el.append('</div>');
+    // TODO: PANORAMIO REQUIREMENTS
   }
 }
 

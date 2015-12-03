@@ -3,6 +3,8 @@ from django.shortcuts import render, render_to_response
 from django.http import HttpResponse
 from django.template import RequestContext
 from django.core.mail import send_mail
+from django.contrib.auth.models import User
+from django.contrib.auth import authenticate, login, logout
 
 from dowwws.models import *
 from dowwws.forms import QuestionForm
@@ -35,8 +37,6 @@ def buy(request):
 		orderCount.save()
 	return render_to_response('product.html', context)
 
-
-
 def contact(request):
 	print("contact")
 	context = RequestContext(request)
@@ -48,10 +48,47 @@ def contact(request):
 def moderate(request):
 	print("moderate")
 	context = RequestContext(request)
-	context['approvedQuestions'] = Question.objects.all().filter(isAnswered=False)
-	context['form'] = QuestionForm()
-	#print(context)
-	return render_to_response('moderate.html', context)
+	if request.user.is_authenticated():
+		print("User is authenticated")
+		context['approvedQuestions'] = Question.objects.all().filter(isAnswered=False)
+		context['form'] = QuestionForm()
+		#print(context)
+		return render_to_response('moderate.html', context)
+	else:
+		print("User is not authenticated")
+		return render_to_response('login.html', context)
+
+def loginUser(request):
+	context = RequestContext(request)
+	username = request.POST['username']
+	password = request.POST['password']
+	user = authenticate(username=username, password=password)
+	if user is not None:
+		print("User is not None")
+		if user.is_active:
+			print("User is active")
+			login(request, user)
+			return moderate(request)
+		else:
+			print("User is not active")
+			return render_to_response('login.html', context)
+	else:
+		return render_to_response('login.html', context)
+
+def registerUser(request):
+	context = RequestContext(request)
+	username = request.POST['username']
+	password = request.POST['password']
+	user = User.objects.create_user(username, password = password)
+	user.save()
+	return render_to_response('login.html', context)
+
+def logOutUser(request):
+	context = RequestContext(request)
+	logout(request)
+	return render_to_response('login.html', context)
+
+
 
 def travelguide(request):
 	print("travelguide")
