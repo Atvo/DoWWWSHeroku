@@ -5,7 +5,8 @@ var activeActivities = [];
 
 var rootLatLng = {lat: 60.187, lng: 24.820};
 var locations = [
-    {coord: {lat: 60.220, lng: 24.865}, activityList: [0, 1, 0, 0], desc: "Strömbergin puisto", active: false},
+    {coord: {lat: 60.220, lng: 24.865}, activityList: [0, 1, 0, 0], desc: "Strömbergin puisto", active: false, 
+    photoCoord: {maxLat: 60.2214, minLat: 60.2185, maxLng: 24.8676, minLng: 24.8637}},
     {coord: {lat: 60.258, lng: 24.603}, activityList: [0, 0, 1, 0], desc: "Sorlammen luontopolku", active: false},
     {coord: {lat: 60.294, lng: 24.558}, activityList: [0, 1, 1, 1], desc: "Päivättärenpolku", active: false},
     {coord: {lat: 60.242, lng: 24.656}, activityList: [1, 0, 0, 0], desc: "Oittaan luontopolku", active: false},
@@ -66,38 +67,52 @@ function initActivities() {
 }
 
 function getPlacePhotos(location) {
-  console.log("getPlacePhotos");
   lat = location.coord.lat;
   lng = location.coord.lng;
-  var wiggle = 0.002;
-  var url_str = "http://www.panoramio.com/map/get_panoramas.php?set=public&from=0&to=10&minx=" + (lng - wiggle) + "&miny=" + (lat - wiggle) + "&maxx=" + (lng + wiggle) + "&maxy=" + (lat + wiggle) + "&size=medium&mapfilter=true";
+  console.log("getPlacePhotos");
+  if (location.photoCoord != undefined) {
+    maxLat = location.photoCoord.maxLat;
+    maxLng = location.photoCoord.maxLng;
+    minLat = location.photoCoord.minLat;
+    minLng = location.photoCoord.minLng;
+    var url_str = "http://www.panoramio.com/map/get_panoramas.php?set=public&from=0&to=10&minx=" + (minLng) + "&miny=" + (minLat) + "&maxx=" + (maxLng) + "&maxy=" + (maxLat) + "&size=medium&mapfilter=true";
+  }
+  else {
+    var wiggle = 0.002;
+    var url_str = "http://www.panoramio.com/map/get_panoramas.php?set=public&from=0&to=10&minx=" + (lng - wiggle) + "&miny=" + (lat - wiggle) + "&maxx=" + (lng + wiggle) + "&maxy=" + (lat + wiggle) + "&size=medium&mapfilter=true";
+  }
+  var desc = location.desc;
   console.log(url_str);
   var coord = new google.maps.LatLng(lat,lng);
   $.ajax({ 
    type: "GET",
    dataType: "jsonp",
    url: url_str,
-   success: function(data){        
-     displayPhotos(data);
+   success: function(data){
+      displayPhotos(data, desc);
    }
   });
 }
 
-function displayPhotos(data) {
+function displayPhotos(data, desc) {
   //alert(JSON.stringify(data));
   //console.log(JSON.stringify(data));
   //console.log(JSON.stringify(data.photos));
   console.log(data.photos.length);
   var el = $("#locationPhotos");
   el.html("");
+  el.append("<p>These photos have been taken near " + desc + "</p>");
   for (var i = 0; i < data.photos.length; i++) {
     var photo = data.photos[i]
     console.log(JSON.stringify(photo));
     el.append('<div class="col-md-2 col-sm-4 col-xs-6">');
-    el.append('<img class="img-responsive customer-img" src="' + photo.photo_file_url + '" alt="">');
+    el.append('<a href="' + photo.photo_url + '"><img class="img-responsive customer-img" src="' + photo.photo_file_url + '" alt=""></a>');
+    el.append('<p>author:' + photo.owner_name + '</p>');
     el.append('</div>');
     // TODO: PANORAMIO REQUIREMENTS
   }
+  el.append("<img class='img-responsive customer-img' src='/static/media/Logo-panoramio-google.png' alt=''></img>");
+  el.append("<p>Photos are collected automatically from <a href='http://www.panoramio.com/'>Panoramio</a><br>Photos provided by Panoramio are under the copyright of their owners<br>Clicking a photo will redirect you to the Panoramio service</p>");
 }
 
 
