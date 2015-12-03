@@ -113,23 +113,46 @@
             <h2 class="page-header">More examples</h2>
         </div>
         <div class="col-md-2 col-sm-4 col-xs-6">
-            <img class="img-responsive customer-img" src="{% static 'media/fishing.jpg' %}" alt="">
+            <img class="img-responsive customer-img" src="{% static 'media/fishing.jpg' %}" alt=""  id="image" onclick="big(this)">
         </div>
         <div class="col-md-2 col-sm-4 col-xs-6">
-            <img class="img-responsive customer-img" src="{% static 'media/fire_summer_1.jpg' %}" alt="">
+            <img class="img-responsive customer-img" src="{% static 'media/fire_summer_1.jpg' %}" alt="" id="image1" onclick="big1(this)">
         </div>
         <div class="col-md-2 col-sm-4 col-xs-6">
-            <img class="img-responsive customer-img" src="{% static 'media/fire_summer_2.jpg' %}" alt="">
+            <img class="img-responsive customer-img" src="{% static 'media/fire_summer_2.jpg' %}" alt="" id="image2" onclick="big2(this)">
         </div>
         <div class="col-md-2 col-sm-4 col-xs-6">
-            <img class="img-responsive customer-img" src="{% static 'media/fire_summer_3.jpg' %}" alt="">
+            <img class="img-responsive customer-img" src="{% static 'media/fire_summer_3.jpg' %}" alt="" id="image3" onclick="big3(this)">
         </div>
         <div class="col-md-2 col-sm-4 col-xs-6">
-            <img class="img-responsive customer-img" src="{% static 'media/sample_3.jpg' %}" alt="">
+            <img class="img-responsive customer-img" src="{% static 'media/sample_3.jpg' %}" alt="" id="image4" onclick="big4(this)">
         </div>
         <div class="col-md-2 col-sm-4 col-xs-6">
-            <img class="img-responsive customer-img" src="{% static 'media/camouflage1.jpg' %}" alt="">
+            <img class="img-responsive customer-img" src="{% static 'media/camouflage1.jpg' %}" alt="" id="image5" onclick="big5(this)">
         </div>
     </div>
 </div>
+<script type="text/javascript">
+function big1(el){
+ $('#image1').bPopup();
+}
+function big2(el){
+ $('#image2').bPopup();
+}
+function big3(el){
+ $('#image3').bPopup();
+}
+function big4(el){
+ $('#image4').bPopup();
+}
+function big5(el){
+ $('#image5').bPopup();
+ }
+ function big(el){
+  $('#image').bPopup();
+  }
+
+
+</script>
+
 {% endblock %}
