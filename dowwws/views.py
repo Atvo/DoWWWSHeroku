@@ -1,10 +1,11 @@
 # -*- coding: utf-8 -*-
 from django.shortcuts import render, render_to_response
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.template import RequestContext
 from django.core.mail import send_mail
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
+from django.utils.encoding import uri_to_iri, iri_to_uri
 
 from dowwws.models import *
 from dowwws.forms import QuestionForm
@@ -68,7 +69,7 @@ def loginUser(request):
 		if user.is_active:
 			print("User is active")
 			login(request, user)
-			return moderate(request)
+			return HttpResponseRedirect('/moderate/')
 		else:
 			print("User is not active")
 			return render_to_response('login.html', context)
@@ -103,20 +104,22 @@ def newQuestion(request):
 		#newQuestion = form.save(commit=False)
 		print(request)
 		newQuestion = Question()
-		serializedStr = request.POST.get('serialized')
+		serializedStr = uri_to_iri(request.POST.get('serialized'))
 		print(serializedStr)
+		print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
+		print(uri_to_iri(serializedStr))
 		arr = serializedStr.split("&")
-		firstName = arr[1].split("=")[1].replace("+", " ").replace("%40", "@").replace("%3F", "?")
-		telNum = arr[2].split("=")[1].replace("+", " ").replace("%40", "@").replace("%3F", "?")
-		email = arr[3].split("=")[1].replace("+", " ").replace("%40", "@").replace("%3F", "?")
-		#title = arr[4].split("=")[1].replace("+", " ").replace("%40", "@").replace("%3F", "?")
-		question = arr[4].split("=")[1].replace("+", " ").replace("%40", "@").replace("%3F", "?")
+		firstName = arr[1].split("=")[1].replace("+", " ")
+		telNum = arr[2].split("=")[1].replace("+", " ")
+		email = arr[3].split("=")[1].replace("+", " ")
+		#title = arr[4].split("=")[1].replace("+", " ").replace("%40", "@").replace("%3F", "?").replace("%E2%82%AC", "€")
+		question = arr[4].split("=")[1].replace("+", " ")
 
 		public = None
 		emailResponse = None
 
 		if len(arr) > 5:
-			checkboxValue = arr[5].split("=")[1].replace("+", " ").replace("%40", "@").replace("%3F", "?")
+			checkboxValue = arr[5].split("=")[1].replace("+", " ")
 			if arr[5].split("=")[0] == "public":
 				public = "on"
 				print("Public ON")
@@ -125,7 +128,7 @@ def newQuestion(request):
 				print("EmailResponse ON")
 				emailResponse = "on"
 		if len(arr) > 6:
-			emailResponse = arr[6].split("=")[1].replace("+", " ").replace("%40", "@").replace("%3F", "?")
+			emailResponse = arr[6].split("=")[1].replace("+", " ")
 
 		newQuestion.name = firstName #request.POST.get('name')
 		print(firstName)
@@ -155,37 +158,41 @@ def newReply(request):
 		context = RequestContext(request)
 		print(request)
 		newQuestion = Question()
-		serializedStr = request.POST.get('serialized')
+		serializedStr = uri_to_iri(request.POST.get('serialized'))
 		print(serializedStr)
 		arr = serializedStr.split("&")
-		postMessage = arr[0].split("=")[1].replace("%C2%A0", " ").replace("%3F", "?")
+		postMessage = arr[0].split("=")[1].replace("+", " ")
 		print(postMessage)
-		postTitle = arr[1].split("=")[1].replace("+", " ").replace("%3F", "?")
+		postId = arr[1].split("=")[1].replace("+", " ")
+		print(postId)
+		postTitle = arr[2].split("=")[1].replace("+", " ")
 		print(postTitle)
-		postAnswer = arr[2].split("=")[1].replace("+", " ").replace("%3F", "?")
+		postAnswer = arr[3].split("=")[1].replace("+", " ")
 		print(postAnswer)
 
 		public = None
 		emailResponse = None
 
-		if len(arr) > 3:
-			checkboxValue = arr[3].split("=")[1].replace("+", " ").replace("%3F", "?")
-			if arr[3].split("=")[0] == "public":
+		if len(arr) > 4:
+			checkboxValue = arr[4].split("=")[1].replace("+", " ")
+			if arr[4].split("=")[0] == "public":
 				public = "on"
 			else: 
 				emailResponse = "on"
 			print(public)
 
-		if len(arr) > 4:
-			emailResponse = arr[4].split("=")[1].replace("+", " ").replace("%3F", "?")
+		if len(arr) > 5:
+			emailResponse = arr[5].split("=")[1].replace("+", " ")
 			print(emailResponse)
 
 		querySet = Question.objects.all()
-		querySet = querySet.filter(message = postMessage.replace(u'\xa0', u' '))
+		querySet = querySet.filter(id = int(postId))
 		question = querySet[0]
-		print(question)
+		print(len(querySet))
+		#print(str(question))
 		#postAnswer = request.POST.get('answer')
 		question.answer = postAnswer
+		question.title = postTitle
 		question.isAnswered = True
 		if public != None and public == "on":
 			question.isPublished = True

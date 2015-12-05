@@ -10,7 +10,8 @@ var locations = [
     {coord: {lat: 60.258, lng: 24.603}, activityList: [0, 0, 1, 0], desc: "Sorlammen luontopolku", active: false},
     {coord: {lat: 60.294, lng: 24.558}, activityList: [0, 1, 1, 1], desc: "Päivättärenpolku", active: false},
     {coord: {lat: 60.242, lng: 24.656}, activityList: [1, 0, 0, 0], desc: "Oittaan luontopolku", active: false},
-    {coord: {lat: 60.188, lng: 24.813}, activityList: [0, 1, 0, 1], desc: "Laajalahden luontopolku", active: false},
+    {coord: {lat: 60.188, lng: 24.813}, activityList: [0, 1, 0, 1], desc: "Laajalahden luontopolku", active: false,
+    photoCoord: {maxLat: 60.2003, minLat: 60.1877, maxLng: 24.8217, minLng: 24.8122}},
     ];
 var activeLocations = []
 var map;

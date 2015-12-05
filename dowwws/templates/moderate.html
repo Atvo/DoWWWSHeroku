@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 {% load spacify %}
 {% load wsstrip %}
+{% load format %}
 {% block content %}
 <!DOCTYPE html>
 <html lang="en">
@@ -23,7 +24,7 @@
   
 {% for question in approvedQuestions %}
  <!-- Modal end-->
- <div id="{{ 'replyForm'|add:question.message|wsstrip }}" class="modal fade" role="dialog">
+ <div id="{{ question.id|format:'replyForm%s' }}" class="modal fade" role="dialog">
  <div class="modal-dialog">
 
  <!-- Modal content-->
@@ -43,6 +44,7 @@
                     <div class="col-sm-8">
                         {{ question.message }}
                         <input name="message" value={{question.message|spacify}} style="visibility:hidden"></input>
+                        <input name="id" value={{ question.id|format:'%s' }} style="visibility:hidden"></input>
                     </div>
                 </div>
                 </div>
@@ -109,14 +111,14 @@
                   role="tablist" aria-multiselectable="true">
              {% for question in approvedQuestions %}
                 <div class="panel panel-default">
-                  <a role="button" data-toggle="collapse" data-parent="#accordion" href={{ "#"|add:"collapse"|add:question.message|wsstrip }} aria-expanded="false" aria-controls={{ "collapse"|add:question.message|wsstrip }}>
-                    <div class="panel-heading" role="tab" id={{ "heading"|add:question.message|wsstrip }} style="color: #333;">
+                  <a role="button" data-toggle="collapse" data-parent="#accordion" href={{ question.id|format:"#collapse%s" }} aria-expanded="false" aria-controls={{ question.id|format:"collapse%s" }}>
+                    <div class="panel-heading" role="tab" id={{ question.id|format:'heading%s' }} style="color: #333;">
                       <h4 class="panel-title">
                           {{ question.title }} <small id="time">{{question.postDate}}</small>
                       </h4>
                     </div>
                   </a>
-                    <div id={{ "collapse"|add:question.message|wsstrip }} class="panel-collapse collapse" role="tabpanel" aria-labelledby={{ "heading"|add:question.message|wsstrip }}>
+                    <div id={{ question.id|format:'collapse%s' }} class="panel-collapse collapse" role="tabpanel" aria-labelledby={{ question.id|format:"heading%s" }}>
                       <div class="panel-body">
                         <form name="answerQuestion" novalidate>
                           {% csrf_token %}
@@ -124,7 +126,7 @@
                         <br></br>
                           <form class="form-horizontal" role="form">
                              <div class="col-sm-offset-1 col-sm-10">
-                               <a data-toggle="modal" data-target="{{ '#'|add:'replyForm'|add:question.message|wsstrip }}"><button type="submit" class="btn btn-primary">Reply</button></a>
+                               <a data-toggle="modal" data-target="{{ question.id|format:"#replyForm%s" }}"><button type="submit" class="btn btn-primary">Reply</button></a>
                              </div>
                          </form>
                         </form>

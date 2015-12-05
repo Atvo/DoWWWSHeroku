@@ -13,7 +13,7 @@ class Question(models.Model):
 	emailResponse = models.BooleanField(default=False) # Will the answer be send to the client with email
 
 	def __str__(self):
-		return self.name + "\n" + self.message + "\n" + self.answer
+		return str(self.name) + "\n" + str(self.message) + "\n" + str(self.answer)
 
 class OrderCount(models.Model):
 	productName = models.CharField(null=False,blank=False, max_length=255) # The name of the product
