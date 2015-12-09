@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+import json
+
 from django.shortcuts import render, render_to_response
 from django.http import HttpResponse, HttpResponseRedirect
 from django.template import RequestContext
@@ -8,7 +10,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.utils.encoding import uri_to_iri, iri_to_uri
 
 from dowwws.models import *
-from dowwws.forms import QuestionForm
+from dowwws.forms import QuestionForm, ReplyForm
 
 
 OUR_EMAIL = "sittingmat@email.com"
@@ -52,7 +54,7 @@ def moderate(request):
 	if request.user.is_authenticated():
 		print("User is authenticated")
 		context['approvedQuestions'] = Question.objects.all().filter(isAnswered=False)
-		context['form'] = QuestionForm()
+		context['form'] = ReplyForm()
 		#print(context)
 		return render_to_response('moderate.html', context)
 	else:
@@ -100,111 +102,172 @@ def newQuestion(request):
 	print("newQuestion")
 	if request.method == 'POST':
 		context = RequestContext(request)
-		#form = QuestionForm(data=request.POST)
-		#newQuestion = form.save(commit=False)
-		print(request)
-		newQuestion = Question()
-		serializedStr = uri_to_iri(request.POST.get('serialized'))
-		print(serializedStr)
-		print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
-		print(uri_to_iri(serializedStr))
-		arr = serializedStr.split("&")
-		firstName = arr[1].split("=")[1].replace("+", " ")
-		telNum = arr[2].split("=")[1].replace("+", " ")
-		email = arr[3].split("=")[1].replace("+", " ")
-		#title = arr[4].split("=")[1].replace("+", " ").replace("%40", "@").replace("%3F", "?").replace("%E2%82%AC", "€")
-		question = arr[4].split("=")[1].replace("+", " ")
+		print(request.POST)
+		form = QuestionForm(request.POST or None)
+		print(form)
 
-		public = None
-		emailResponse = None
+		if form.is_valid():
+			print(form.cleaned_data)
+			firstName = form.cleaned_data["name"]
+			#telNum = form.cleaned_data.get("name")
+			email = form.cleaned_data.get("email")
+			question = form.cleaned_data.get("message")
+			public = form.cleaned_data.get("public")
+			emailResponse = form.cleaned_data.get("emailResponse")
+			# newQuestion = form.save(commit=False)
+			# print(request)
+			newQuestion = Question()
+			# for var in request:
+			# 	print(var)
+			# serializedStr = uri_to_iri(request.POST.get('serialized'))
+			# print(serializedStr)
+			# print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
+			# print(uri_to_iri(serializedStr))
+			# arr = serializedStr.split("&")
+			# firstName = arr[1].split("=")[1].replace("+", " ")
+			# telNum = arr[2].split("=")[1].replace("+", " ")
+			# email = arr[3].split("=")[1].replace("+", " ")
+			# title = arr[4].split("=")[1].replace("+", " ").replace("%40", "@").replace("%3F", "?").replace("%E2%82%AC", "€")
+			# question = arr[4].split("=")[1].replace("+", " ")
 
-		if len(arr) > 5:
-			checkboxValue = arr[5].split("=")[1].replace("+", " ")
-			if arr[5].split("=")[0] == "public":
-				public = "on"
-				print("Public ON")
-			else:
-				print(arr[5].split("=")[0])
-				print("EmailResponse ON")
-				emailResponse = "on"
-		if len(arr) > 6:
-			emailResponse = arr[6].split("=")[1].replace("+", " ")
+			# public = None
+			# emailResponse = None
 
-		newQuestion.name = firstName #request.POST.get('name')
-		print(firstName)
-		newQuestion.email = email #request.POST.get('email')
-		print(email)
-		newQuestion.message = question #request.POST.get('message')
-		print(question)
-		#newQuestion.title = title #request.POST.get('message')
-		print(public)
-		print(public == None)
-		if public == None:
-			newQuestion.public = False
-			print("public = False")
+			# if len(arr) > 5:
+			# 	checkboxValue = arr[5].split("=")[1].replace("+", " ")
+			# 	if arr[5].split("=")[0] == "public":
+			# 		public = "on"
+			# 		print("Public ON")
+			# 	else:
+			# 		print(arr[5].split("=")[0])
+			# 		print("EmailResponse ON")
+			# 		emailResponse = "on"
+			# if len(arr) > 6:
+			# 	emailResponse = arr[6].split("=")[1].replace("+", " ")
 
-		print(emailResponse)
-		print(emailResponse != None)
-		print(emailResponse == "on")
-		if emailResponse != None and emailResponse == "on":
-			newQuestion.emailResponse = True
-			print("emailResponse = True")
-		newQuestion.save()
-		return contact(request)
+			newQuestion.name = firstName #request.POST.get('name')
+			print(firstName)
+			newQuestion.email = email #request.POST.get('email')
+			print(email)
+			newQuestion.message = question #request.POST.get('message')
+			print(question)
+			#newQuestion.title = title #request.POST.get('message')
+			newQuestion.public = public
+			print(public)
+			newQuestion.emailResponse = emailResponse
+			print(emailResponse)
+			# print(public)
+			# print(public == None)
+			# if public == None:
+			# 	newQuestion.public = False
+			# 	print("public = False")
+
+			# print(emailResponse)
+			# print(emailResponse != None)
+			# print(emailResponse == "on")
+			# if emailResponse != None and emailResponse == "on":
+			# 	newQuestion.emailResponse = True
+			# 	print("emailResponse = True")
+			newQuestion.save()
+			return contact(request)
+		else:
+			print("FORM NOT VALID")
+			print(form)
+			print(request.POST.get('serialized'))
 
 def newReply(request):
 	print("newReply")
 	if request.method == 'POST':
 		context = RequestContext(request)
 		print(request)
-		newQuestion = Question()
-		serializedStr = uri_to_iri(request.POST.get('serialized'))
-		print(serializedStr)
-		arr = serializedStr.split("&")
-		postMessage = arr[0].split("=")[1].replace("+", " ")
-		print(postMessage)
-		postId = arr[1].split("=")[1].replace("+", " ")
-		print(postId)
-		postTitle = arr[2].split("=")[1].replace("+", " ")
-		print(postTitle)
-		postAnswer = arr[3].split("=")[1].replace("+", " ")
-		print(postAnswer)
+		form = ReplyForm(request.POST or None)
+		print(form)
+		print("!!!!!!!!!!!!!")
+		for var in request:
+			print(var)
+		print("!!!!!!!!!!!!")
 
-		public = None
-		emailResponse = None
+		if form.is_valid():
+			print(form.cleaned_data)
 
-		if len(arr) > 4:
-			checkboxValue = arr[4].split("=")[1].replace("+", " ")
-			if arr[4].split("=")[0] == "public":
-				public = "on"
-			else: 
-				emailResponse = "on"
+			serializedStr = uri_to_iri(request.POST)
+			print(serializedStr)
+			arr = serializedStr.split("&")
+			#arr = json.loads(serializedStr)
+			print("ARR")
+			for var in arr:
+				print(var)
+			print("END")
+			#postMessage = arr[0].split("=")[1].replace("+", " ")
+			#postMessage = arr[0][0]
+			#postMessage = arr.get("message")
+			postMessage = request.POST.get("message")
+			print(postMessage)
+			#postId = arr[1].split("=")[1].replace("+", " ")
+			postId = request.POST.get("id")
+			print(postId)
+			postTitle = form.cleaned_data.get("title")
+			#postTitle = arr[2].split("=")[1].replace("+", " ")
+			print(postTitle)
+			postAnswer = form.cleaned_data.get("answer")
+			#postAnswer = arr[3].split("=")[1].replace("+", " ")
+			print(postAnswer)
+
+			public = request.POST.get("public")
+			emailResponse = request.POST.get("emailResponse")
+
+			# last = arr[len(arr)-1]
+			# secToLast = arr[len(arr)-2]
+
+			# if last.split("=")[0] == "emailResponse":
+			# 	emailResponse = last.split("=")[1].replace("+", " ")
+			# 	if secToLast.split("=")[0] == "public":
+			# 		public = secToLast.split("=")[1].replace("+", " ")
+
+			# if last.split("=")[0] == "public":
+			# 	public = last.split("=")[1].replace("+", " ")
+
 			print(public)
-
-		if len(arr) > 5:
-			emailResponse = arr[5].split("=")[1].replace("+", " ")
 			print(emailResponse)
 
-		querySet = Question.objects.all()
-		querySet = querySet.filter(id = int(postId))
-		question = querySet[0]
-		print(len(querySet))
-		#print(str(question))
-		#postAnswer = request.POST.get('answer')
-		question.answer = postAnswer
-		question.title = postTitle
-		question.isAnswered = True
-		if public != None and public == "on":
-			question.isPublished = True
+			# if len(arr) > 4:
+			# 	checkboxValue = arr[4].split("=")[1].replace("+", " ")
+			# 	if arr[4].split("=")[0] == "public":
+			# 		public = "on"
+			# 	else: 
+			# 		emailResponse = "on"
+			# 	print(public)
 
-		if emailResponse != None and emailResponse == "on":
-			print("send Mail")
-			send_mail('Subject here', 'Here is the message.', OUR_EMAIL,
-    [question.email], fail_silently=False)
+			# if len(arr) > 5:
+			# 	emailResponse = arr[5].split("=")[1].replace("+", " ")
+			# 	print(emailResponse)
+
+			querySet = Question.objects.all()
+			querySet = querySet.filter(id = int(postId))
+			question = querySet[0]
+			print(len(querySet))
+			#print(str(question))
+			#postAnswer = request.POST.get('answer')
+			question.answer = postAnswer
+			question.title = postTitle
+			question.isAnswered = True
+			if public != None and public == "on":
+				question.isPublished = True
+
+			if emailResponse != None and emailResponse == "on":
+				print("send Mail")
+				send_mail('Subject here', 'Here is the message.', OUR_EMAIL,
+	    [question.email], fail_silently=False)
 
 
-			#send_mail('Subject here', 'Here is the message.', 'from@example.com',
-    #['to@example.com'], fail_silently=False)
+				#send_mail('Subject here', 'Here is the message.', 'from@example.com',
+	    #['to@example.com'], fail_silently=False)
 
-		question.save()
-		return moderate(request)
+			question.save()
+			return moderate(request)
+
+		else:
+			print("FORM NOT VALID")
+			print(form)
+			print(request.POST.get('serialized'))
+
