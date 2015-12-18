@@ -89,3 +89,14 @@ text-align: right;
 .slider li { float:left; margin:0 5px 0 0; list-style:none;display: inline;}
 /* IE6 issues */
 .slider ul { width:100%; }
+.row-footer{
+    background-color: #585B61;
+    /*margin:0px auto;*/
+    margin: 0px;
+    padding: 20px 0px 20px 0px;
+
+    color:#fff;
+}
+.reserve{
+  text-align: center;
+}
