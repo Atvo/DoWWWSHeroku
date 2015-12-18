@@ -2,6 +2,15 @@
      background:#FF8533;
      color:#fff;
 }
+
+.navbar-inverse .navbar-nav > li > a {
+    color: #fff;
+}
+
+.navbar-inverse .navbar-brand {
+    color: #fff;
+}
+
 .navbar-inverse .navbar-nav > .active > a,
 .navbar-inverse .navbar-nav > .active > a:hover,
 .navbar-inverse .navbar-nav > .active > a:focus {
@@ -14,6 +23,9 @@
  .navbar-inverse .navbar-nav > .open > a:focus {
     color: #fff;
     background: #1A237E;
+}
+.navbar-text-white{
+  color: #777;
 }
 .row-content {
     margin:0px auto;
