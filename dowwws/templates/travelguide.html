@@ -9,11 +9,11 @@
             <h1 class="page-header">Travel guide
                 <small>for the capital area</small>
             </h1>
-            <!-- <ol class="breadcrumb">
-                <li><a href="index.html">Home</a>
+            <ol class="breadcrumb">
+                <li><a href="../index">Home</a>
                 </li>
-                <li class="active">Contact</li>
-            </ol> -->
+                <li class="active">Travel guide</li>
+            </ol>
         </div>
     </div>
     <!-- /.row -->
@@ -72,11 +72,29 @@
                 </li>
             </ul>
         </div>
-    </div>
+      </div>
 
     <!-- Content Row -->
-    <div class="row row-content" id="locationPhotos">
-    </div>
+
+
+
+
+            <div class="row row-content" >
+              <div class="slider" id="sliderfun">
+                  <ul>
+                   <li  id="locationPhotos"></li>
+                  </ul>
+
+                </div>
+                          <div class="controls">
+
+                        <a href="#" class="prev-slide">Prev Slide</a> |
+                        <a href="#" class="next-slide">Next Slide</a> |
+
+                    </div>
+            </div>
+
+
 
     <!-- /.row -->
 
@@ -84,5 +102,15 @@
     <!-- /.row -->
 
 </div>
+<script>
+      window.onload = function(){
+
+      $( '#sliderfun' ).lemmonSlider({
+        'infinite' : true
+      });
+
+
+      }
+</script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD80_YxdlsnPmgr8Y3LGjarxY76NSPjGH4&libraries=places&callback=initMap&initFilters&initActivities" async defer></script>
 {% endblock %}
