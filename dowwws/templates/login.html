@@ -20,7 +20,8 @@
   </head>
   <body>
   <div class="container">
-      <div class="col-xs-12 col-sm-8 col-md-6 col-lg-5 centeredcol">
+    <div class="row row-content">
+      <div class="col-xs-12 col-sm-6 col-md-5 col-lg-5 centeredcol">
           <div class="tile margined">
               <form id="loginForm" class="form" method="post" action="/login/">
                   {% csrf_token %}
@@ -33,7 +34,7 @@
               </form>
           </div>
       </div>
-    <div class="col-xs-12 col-sm-9 col-md-7 col-lg-6 centeredcol">
+    <div class="col-xs-12 col-sm-6 col-md-5 col-lg-5 centeredcol">
         <div class="tile margined">
             <form class="form" method="post" action="/register/" enctype="multipart/form-data">
                 <h2>New User Registration</h2>
@@ -50,8 +51,8 @@
 
     </div>
   </div>
-  <div style="padding: 120px">
   </div>
+  
   </body>
 </html>
 {% endblock %}
