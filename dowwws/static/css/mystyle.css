@@ -1,3 +1,20 @@
+/* Text properties */
+
+.menu-text {
+    text-transform: uppercase;
+    font-size: 18px;
+}
+
+.subheader {   
+    margin-top: 0px;
+}
+
+/* Links properties */
+
+.menu-link a:hover{
+    font-weight:bold;
+}
+
 .navbar-inverse {
      background:#FF8533;
      color:#fff;
@@ -19,8 +36,8 @@
 }
 
 .navbar-inverse .navbar-nav > .open > a,
- .navbar-inverse .navbar-nav > .open > a:hover,
- .navbar-inverse .navbar-nav > .open > a:focus {
+.navbar-inverse .navbar-nav > .open > a:hover,
+.navbar-inverse .navbar-nav > .open > a:focus {
     color: #fff;
     background: #1A237E;
 }
@@ -111,4 +128,9 @@ text-align: right;
 }
 .reserve{
   text-align: center;
+}
+
+.buy-button{  
+    margin-top: 10px;
+    margin-left: 0px;    
 }
