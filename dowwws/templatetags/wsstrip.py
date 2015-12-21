@@ -8,10 +8,10 @@ register = Library()
 
 @stringfilter
 def wsstrip(value, autoescape=None):
-    if autoescape:
-	esc = conditional_escape
-    else:
-	esc = lambda x: x
-    return mark_safe(re.sub('[\s?!]', '', esc(value)))
+	if autoescape:
+		esc = conditional_escape
+	else:
+		esc = lambda x: x
+	return mark_safe(re.sub('[\s?!]', '', esc(value)))
 wsstrip.needs_autoescape = True
 register.filter(wsstrip)
