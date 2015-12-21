@@ -128,7 +128,7 @@ CRISPY_TEMPLATE_PACK = "bootstrap3"
 
 # Static asset configuration
 import os
-#BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 STATIC_ROOT = 'static'
 STATIC_URL = '/static/'
 
