@@ -1,17 +1,22 @@
 
 // Global Maps Variables
-var activities = ["Hiking", "Kayaking", "Swimming", "Skiing"]
+var activities = ["Hiking", "Kayaking", "Swimming", "Skiing", "Walking"]
 var activeActivities = [];
 
 var rootLatLng = {lat: 60.187, lng: 24.820};
 var locations = [
-    {coord: {lat: 60.220, lng: 24.865}, activityList: [0, 1, 0, 0], desc: "Strömbergin puisto", active: false, 
+    {coord: {lat: 60.220, lng: 24.865}, activityList: [0, 1, 0, 0, 1], desc: "Strömbergin puisto", active: false, description: "Strömbergin puisto is a nice place", 
     photoCoord: {maxLat: 60.2214, minLat: 60.2185, maxLng: 24.8676, minLng: 24.8637}},
-    {coord: {lat: 60.258, lng: 24.603}, activityList: [0, 0, 1, 0], desc: "Sorlammen luontopolku", active: false},
-    {coord: {lat: 60.294, lng: 24.558}, activityList: [0, 1, 1, 1], desc: "Päivättärenpolku", active: false},
-    {coord: {lat: 60.242, lng: 24.656}, activityList: [1, 0, 0, 0], desc: "Oittaan luontopolku", active: false},
-    {coord: {lat: 60.188, lng: 24.813}, activityList: [0, 1, 0, 1], desc: "Laajalahden luontopolku", active: false,
+
+    {coord: {lat: 60.258, lng: 24.603}, activityList: [0, 0, 1, 0, 0], desc: "Sorlammen luontopolku", active: false},
+
+    {coord: {lat: 60.294, lng: 24.558}, activityList: [0, 1, 1, 1, 0], desc: "Päivättärenpolku", active: false},
+
+    {coord: {lat: 60.242, lng: 24.656}, activityList: [1, 0, 0, 0, 0], desc: "Oittaan luontopolku", active: false},
+
+    {coord: {lat: 60.188, lng: 24.813}, activityList: [0, 1, 0, 1, 0], desc: "Laajalahden luontopolku", active: false,
     photoCoord: {maxLat: 60.2003, minLat: 60.1877, maxLng: 24.8217, minLng: 24.8122}},
+
     ];
 var activeLocations = []
 var map;

@@ -19,7 +19,7 @@
 
     <!-- Intro Content -->
     <div class="row row-content">
-        <div class="col-md-6">
+        <div class="col-sm-6">
           <div id="mycarousel" class="carousel slide" data-ride="carousel">
             <ol class="carousel-indicators">
                 <li data-target="#mycarousel" data-slide-to="0" class="active"></li>
@@ -93,7 +93,7 @@
 
         </div>
       </div>
-        <div class="col-md-6">
+        <div class="col-sm-6">
             <h2>Outdoor sitting mats</h2>
             <p>Our product is a lightweight cushion (PE-foam mat) used for sitting outdoor in harsh environments, like wet, cold and rough surface. The cushion comes with a printed logo or name of a company, event, club etc.  Consectetur, quod, incidunt, harum nisi dolores delectus reprehenderit voluptatem perferendis dicta dolorem non blanditiis ex fugiat.</p>
             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Saepe, magni, aperiam vitae illum voluptatum aut sequi impedit non velit ab ea pariatur sint quidem corporis eveniet. Odit, temporibus reprehenderit dolorum!</p>
@@ -143,7 +143,11 @@
 </div>
 <script type="text/javascript">
 function big1(el){
- $('#image1').bPopup();
+    var imageCopy = $('#image1').clone();
+    console.log(imageCopy);
+    imageCopy.bPopup({
+        positionStyle: 'fixed',
+    });
 }
 function big2(el){
  $('#image2').bPopup();

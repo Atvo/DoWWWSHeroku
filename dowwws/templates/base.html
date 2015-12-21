@@ -62,7 +62,11 @@
                         <a href="/contact/">Contacts</a>
                     </li>
                     <li>
+                        {% if page == "Travel guide" %}
+                        <a href="/travelguide/" style="font-weight: bold">Travel guide</a>
+                        {% else %}
                         <a href="/travelguide/">Travel guide</a>
+                        {% endif %}
                     </li>
                     {% if user.is_authenticated %}
                     <li>

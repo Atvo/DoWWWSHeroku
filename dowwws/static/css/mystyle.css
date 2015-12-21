@@ -116,11 +116,6 @@ text-align: right;
 .customer-img{
   position:relative;
 }
-.slider    { overflow:hidden; position:relative; }
-.slider ul { margin:0; padding:0; }
-.slider li { float:left; margin:0 5px 0 0; list-style:none;display: inline;}
-/* IE6 issues */
-.slider ul { width:100%; }
 .row-footer{
     background-color: #585B61;
     /*margin:0px auto;*/
@@ -136,4 +131,7 @@ text-align: right;
 .buy-button{  
     margin-top: 10px;
     margin-left: 0px;    
+}
+#locationPhotos{
+    border: 10px solid red;
 }

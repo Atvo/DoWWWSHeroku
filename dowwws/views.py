@@ -96,6 +96,7 @@ def logOutUser(request):
 def travelguide(request):
 	print("travelguide")
 	context = RequestContext(request)
+	context["page"] = "Travel guide"
 	return render_to_response('travelguide.html', context)
 
 def newQuestion(request):
