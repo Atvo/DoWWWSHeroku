@@ -44,7 +44,7 @@ $(document).ready(function () {
 		},
 		function(data,status){
 			var message = data;
-			alert("Unfortunately you can't buy the product yet :(");
+			alert("Unfortunately you cannot buy the product at the moment. Please leave your request through the contact form and we will get in touch when the mats are available. Thank you!");
 			location.reload(forceGet=true);
 		});
 	});
