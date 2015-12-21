@@ -7,6 +7,9 @@
 
 .subheader {   
     margin-top: 0px;
+    padding-top: 9px;    
+    padding-left: 30px;
+    background-color: #CCCCB3;
 }
 
 /* Links properties */
