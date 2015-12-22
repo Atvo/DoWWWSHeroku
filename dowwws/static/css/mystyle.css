@@ -1,5 +1,17 @@
 /* Text properties */
 
+body {
+    font-family: 'Arimo', Verdana, sans-serif;
+}
+
+p {
+    font-size: 14pt;
+}
+
+ul {
+    font-size: 14pt;
+}
+
 .menu-text {
     text-transform: uppercase;
     font-size: 18px;
