@@ -130,7 +130,7 @@ CRISPY_TEMPLATE_PACK = "bootstrap3"
 import os
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')#'static'
-STATIC_URL = '/static/'
+STATIC_URL = os.path.join(BASE_DIR, '/static/')#'/static/'
 
 # STATICFILES_DIRS = (
 #     os.path.join(BASE_DIR, 'static'),
