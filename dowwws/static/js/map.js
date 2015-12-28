@@ -81,11 +81,11 @@ function getPlacePhotos(location) {
     maxLng = location.photoCoord.maxLng;
     minLat = location.photoCoord.minLat;
     minLng = location.photoCoord.minLng;
-    var url_str = "http://www.panoramio.com/map/get_panoramas.php?set=public&from=0&to=10&minx=" + (minLng) + "&miny=" + (minLat) + "&maxx=" + (maxLng) + "&maxy=" + (maxLat) + "&size=medium&mapfilter=true";
+    var url_str = "http://www.panoramio.com/map/get_panoramas.php?set=public&from=0&to=6&minx=" + (minLng) + "&miny=" + (minLat) + "&maxx=" + (maxLng) + "&maxy=" + (maxLat) + "&size=medium&mapfilter=true";
   }
   else {
     var wiggle = 0.002;
-    var url_str = "http://www.panoramio.com/map/get_panoramas.php?set=public&from=0&to=10&minx=" + (lng - wiggle) + "&miny=" + (lat - wiggle) + "&maxx=" + (lng + wiggle) + "&maxy=" + (lat + wiggle) + "&size=medium&mapfilter=true";
+    var url_str = "http://www.panoramio.com/map/get_panoramas.php?set=public&from=0&to=6&minx=" + (lng - wiggle) + "&miny=" + (lat - wiggle) + "&maxx=" + (lng + wiggle) + "&maxy=" + (lat + wiggle) + "&size=medium&mapfilter=true";
   }
   var desc = location.desc;
   console.log(url_str);
@@ -107,18 +107,65 @@ function displayPhotos(data, desc) {
   console.log(data.photos.length);
   var el = $("#locationPhotos");
   el.html("");
-  el.append("<p>These photos have been taken near " + desc + "</p>");
+  /*el.append('<div class="row row-content">')
+  el.append('<div class="col-lg-12"><p>These photos have been taken near ' + desc + '</p></div>');*/
   for (var i = 0; i < data.photos.length; i++) {
     var photo = data.photos[i]
     console.log(JSON.stringify(photo));
-    el.append('<div class="col-md-2 col-sm-4 col-xs-6">');
-    el.append('<a href="' + photo.photo_url + '"><img class="img-responsive customer-img" src="' + photo.photo_file_url + '" alt=""></a>');
-    el.append('<p>author:' + photo.owner_name + '</p>');
-    el.append('</div>');
+    tmpEl = $('<img class="img-responsive customer-img popUpImage" src="' + photo.photo_file_url + '" alt="">').appendTo($('<div class="col-md-2 col-sm-4 col-xs-6"></div>').appendTo('#locationPhotos'));
+    (function (photo) {
+      tmpEl.on( "click", function( event ) {
+        var imageCopy = $(this).clone();
+        imageCopy.on( "click", function( event ) {
+          console.log(i);
+          console.log(photo.photo_url);
+          window.location.href = photo.photo_url;
+        });
+        console.log(photo.photo_url)
+        height = this.naturalHeight;
+        width = this.naturalWidth;
+        windowWidth = $(window).width();
+        windowHeight = $(window).height();
+        var x = windowWidth / 2 - width / 2;
+        var y = windowHeight / 2 - height / 2;
+        imageCopy.bPopup({
+            positionStyle: 'fixed',
+            position: [x, y],
+        });
+      })
+    })(photo);
+    /*tmpEl.on( "click", function( event ) {
+      var imageCopy = $(this).clone();
+      imageCopy.on( "click", function( event ) {
+        console.log(i);
+        console.log(photo.photo_url);
+        window.location.href = photo.photo_url;
+      });
+      console.log(photo.photo_url)
+      height = this.naturalHeight;
+      width = this.naturalWidth;
+      windowWidth = $(window).width();
+      windowHeight = $(window).height();
+      var x = windowWidth / 2 - width / 2;
+      var y = windowHeight / 2 - height / 2;
+      imageCopy.bPopup({
+          positionStyle: 'fixed',
+          position: [x, y],
+      });
+    })*/
+
+    //$('<a href="' + photo.photo_url + '"><img class="img-responsive customer-img popUpImage" src="' + photo.photo_file_url + '" alt=""></a>').appendTo($('<div class="col-md-2 col-sm-4 col-xs-6"></div>').appendTo('#locationPhotos'));
+
+    /*el.append('<div class="col-md-2 col-sm-4 col-xs-6"></div>');
+    el.append('<a href="' + photo.photo_url + '"><img class="img-responsive customer-img popUpImage" src="' + photo.photo_file_url + '" alt=""></a>');
+    el.append('<p>author:' + photo.owner_name + '</p>');*/
+    //el.append('</div>');
     // TODO: PANORAMIO REQUIREMENTS
   }
-  el.append("<img class='img-responsive customer-img' src='/static/media/Logo-panoramio-google.png' alt=''></img>");
-  el.append("<p>Photos are collected automatically from <a href='http://www.panoramio.com/'>Panoramio</a><br>Photos provided by Panoramio are under the copyright of their owners<br>Clicking a photo will redirect you to the Panoramio service</p>");
+  if ( $( "#panoramioEl" ).length == 0) {
+    var panoramioEl = el.after("<img id='panoramioEl' class='img-responsive customer-img' src='/static/media/Logo-panoramio-google.png' alt=''></img>");
+    el.after("<p>Photos are collected automatically from <a href='http://www.panoramio.com/'>Panoramio</a><br>Photos provided by Panoramio are under the copyright of their owners<br>Clicking a photo will redirect you to the Panoramio service</p>");
+  }
 }
 
 
