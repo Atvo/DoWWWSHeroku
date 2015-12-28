@@ -1,4 +1,25 @@
+.bg-darker {
+  background: #F5F5F0;  
+  margin-left: 0px;
+  margin-right: 0px;  
+  padding-top: 15px;
+  padding-bottom: 15px;
+
+}
+
 /* Text properties */
+
+body {
+    font-family: 'Arimo', Verdana, sans-serif;
+}
+
+p {
+    font-size: 14pt;
+}
+
+ul {
+    font-size: 14pt;
+}
 
 .menu-text {
     text-transform: uppercase;
@@ -10,6 +31,9 @@
     padding-top: 9px;    
     padding-left: 30px;
     background-color: #CCCCB3;
+    font-style: italic;
+    font-size: 18px;
+    font-weight: bold;
 }
 
 /* Links properties */
@@ -58,6 +82,7 @@
   background: #F5F5F0;
 
 }
+
 #rep{
   padding: 20px;
 }
