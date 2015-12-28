@@ -81,11 +81,11 @@ function getPlacePhotos(location) {
     maxLng = location.photoCoord.maxLng;
     minLat = location.photoCoord.minLat;
     minLng = location.photoCoord.minLng;
-    var url_str = "http://www.panoramio.com/map/get_panoramas.php?set=public&from=0&to=6&minx=" + (minLng) + "&miny=" + (minLat) + "&maxx=" + (maxLng) + "&maxy=" + (maxLat) + "&size=medium&mapfilter=true";
+    var url_str = "//www.panoramio.com/map/get_panoramas.php?set=public&from=0&to=6&minx=" + (minLng) + "&miny=" + (minLat) + "&maxx=" + (maxLng) + "&maxy=" + (maxLat) + "&size=medium&mapfilter=true";
   }
   else {
     var wiggle = 0.002;
-    var url_str = "http://www.panoramio.com/map/get_panoramas.php?set=public&from=0&to=6&minx=" + (lng - wiggle) + "&miny=" + (lat - wiggle) + "&maxx=" + (lng + wiggle) + "&maxy=" + (lat + wiggle) + "&size=medium&mapfilter=true";
+    var url_str = "//www.panoramio.com/map/get_panoramas.php?set=public&from=0&to=6&minx=" + (lng - wiggle) + "&miny=" + (lat - wiggle) + "&maxx=" + (lng + wiggle) + "&maxy=" + (lat + wiggle) + "&size=medium&mapfilter=true";
   }
   var desc = location.desc;
   console.log(url_str);
@@ -96,7 +96,7 @@ function getPlacePhotos(location) {
    url: url_str,
    success: function(data){
       displayPhotos(data, desc);
-   },
+   }
   });
 }
 
