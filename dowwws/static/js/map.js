@@ -95,7 +95,11 @@ function getPlacePhotos(location) {
    dataType: "jsonp",
    url: url_str,
    success: function(data){
+    alert(data);
       displayPhotos(data, desc);
+   },
+   error: function(data) {
+    alert(data);
    }
   });
 }
