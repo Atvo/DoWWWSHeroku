@@ -94,12 +94,12 @@ WSGI_APPLICATION = 'hellodjango.wsgi.application'
 #}
 
 # ON LOCAL
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': 'mydatabase',
-    }
-}
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': 'mydatabase',
+#     }
+# }
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.8/topics/i18n/
@@ -122,7 +122,10 @@ USE_TZ = True
 import dj_database_url
 
 #ON HEROKU
-#DATABASES = {'default': dj_database_url.config(default=DATABASE_URL)}
+import os
+if os.getcwd() == "/app":
+    DATABASES = {'default': dj_database_url.config()}
+    #DATABASES = {'default': dj_database_url.config(default=DATABASE_URL)}
 
 # Honor the 'X-Forwarded-Proto' header for request.is_secure()
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
