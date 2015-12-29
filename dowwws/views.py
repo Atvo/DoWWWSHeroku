@@ -178,11 +178,6 @@ def newReply(request):
 		context = RequestContext(request)
 		#print(request)
 		form = ReplyForm(request.POST or None)
-		#print(form)
-		#print("!!!!!!!!!!!!!")
-		for var in request:
-			#print(var)
-		#print("!!!!!!!!!!!!")
 
 		if form.is_valid():
 			#print(form.cleaned_data)
@@ -192,9 +187,6 @@ def newReply(request):
 			arr = serializedStr.split("&")
 			#arr = json.loads(serializedStr)
 			#print("ARR")
-			for var in arr:
-				#print(var)
-			#print("END")
 			#postMessage = arr[0].split("=")[1].replace("+", " ")
 			#postMessage = arr[0][0]
 			#postMessage = arr.get("message")
@@ -262,9 +254,4 @@ def newReply(request):
 
 			question.save()
 			return moderate(request)
-
-		else:
-			#print("FORM NOT VALID")
-			#print(form)
-			#print(request.POST.get('serialized'))
 
