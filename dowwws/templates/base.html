@@ -84,48 +84,9 @@
     <section id="content" class="tr">
     {% block content %}{% endblock %}
     </section>
-    <footer class="row-footer">
-            <div class="container">
-                <div class="row">
-                    <div class="col-xs-5 col-xs-offset-1 col-sm-3 col-sm-offset-1">
-                        <h5>Links</h5>
-                        <ul class="list-unstyled">
-                            <li><a href="#">Home</a></li>
-                            <li><a href="#">Products</a></li>
-                            <li><a href="#">Travel Guide</a></li>
-                            <li><a href="#">Contacts</a></li>
-                        </ul>
-                    </div>
-                    <div class="col-xs-6 col-sm-4">
-                        <h5>Our Address</h5>
-                        <address>
-    		              Otakaari 1, Espoo <br>
-    		              FINLAND<br>
-    		             <i class="fa fa-phone"> </i>: +357 1234 5678<br>
-    		             <i class="fa fa-fax"> </i> : +357 8765 4321<br>
-    		              <i class="fa fa-envelope"></i> : <a href="wwwdesignproject@aalto.fi">wwwdesignproject@aalto.fi</a>
-    		           </address>
-                    </div>
-                    <div class="col-xs-12 col-sm-4">
-                      <h5>Our community<h5>
 
-                             <ul class="list-unstyled" id="social">
-                          <li> <a class="btn btn-social-icon btn-google-plus" href="//google.com/+"><i class="fa fa-google-plus"></i></a> google.com/wwwdesignproject</li>
-                          <li>  <a class="btn btn-social-icon btn-facebook" href="//www.facebook.com/profile.php?id="><i class="fa fa-facebook"></i></a> facebook.com/wwwdesignproject</li>
-                          <li><a class="btn btn-social-icon btn-linkedin" href="//www.linkedin.com/in/"><i class="fa fa-linkedin"></i></a> linkedin.com/wwwdesignproject</li>
-                          <li>  <a class="btn btn-social-icon btn-twitter" href="//twitter.com/"><i class="fa fa-twitter"></i></a> twitter.com/wwwdesignproject</li>
-                          <li>  <a class="btn btn-social-icon btn-youtube" href="//youtube.com/"><i class="fa fa-youtube"></i></a> youtube.com/wwwdesignproject</li>
+    {% include "footer.html"%}
 
-                          </ul>
-
-                    </div>
-                    <div class="col-xs-12 col-sm-12">
-
-                        <p align=center><i class="fa fa-copyright"></i> Copyright 2015 WWW Design project</p><p class="reserve">All rights reserved. Third-party trademarks are used solely for information about how to use the mats.</p>
-                    </div>
-                </div>
-            </div>
-        </footer>
 
     <!-- Script to Activate the Carousel -->
     <script src="{% static "js/bootstrap.min.js" %}"></script>

@@ -9,17 +9,15 @@
 
 /* Text properties */
 
+@import url('http://fonts.googleapis.com/css?family=Open+Sans:400,700');
+
+
 body {
     font-family: 'Arimo', Verdana, sans-serif;
 }
 
-p {
-    font-size: 14pt;
-}
 
-ul {
-    font-size: 14pt;
-}
+
 
 .menu-text {
     text-transform: uppercase;
@@ -142,12 +140,13 @@ text-align: right;
   position:relative;
 }
 .row-footer{
-    background-color: #585B61;
-    /*margin:0px auto;*/
-    margin: 0px;
-    padding: 20px 0px 20px 0px;
+  background-color: #292c2f;
+  
+  width: 100%;
 
-    color:#fff;
+  padding: 0px 0px 50px 0px;
+  margin:0px auto;
+  color:white;
 }
 .reserve{
   text-align: center;
