@@ -1,5 +1,5 @@
 /* Text properties */
-
+@import url('http://fonts.googleapis.com/css?family=Open+Sans:400,700');
 .menu-text {
     text-transform: uppercase;
     font-size: 18px;
@@ -117,13 +117,17 @@ text-align: right;
 .customer-img{
   position:relative;
 }
-.row-footer{
-    background-color: #585B61;
-    /*margin:0px auto;*/
-    margin: 0px;
-    padding: 20px 0px 20px 0px;
+.row-footer,address{
+  background-color: #292c2f;
+  box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.12);
+  box-sizing: border-box;
+  width: 100%;
+  
+  font: normal 18px sans-serif;
 
-    color:#fff;
+  padding: 0px 0px 50px 0px;
+  margin:0px auto;
+  color:white;
 }
 .reserve{
   text-align: center;
