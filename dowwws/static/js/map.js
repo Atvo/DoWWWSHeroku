@@ -5,7 +5,7 @@ var activeActivities = [];
 
 var rootLatLng = {lat: 60.187, lng: 24.820};
 var locations = [
-    {coord: {lat: 60.220, lng: 24.865}, activityList: [0, 0, 0, 1], desc: "Strömbergin puisto", active: false, description: "Strömbergin puisto is a small city park with the only real natural waterfall in Helsinki.", 
+    {coord: {lat: 60.220, lng: 24.865}, activityList: [0, 0, 0, 1], desc: "Strömbergin puisto", address: "YOLO", active: false, description: "Strömbergin puisto is a small city park with the only real natural waterfall in Helsinki.", 
     photoCoord: {maxLat: 60.2214, minLat: 60.2185, maxLng: 24.8676, minLng: 24.8637}},
 
     {coord: {lat: 60.258, lng: 24.603}, activityList: [0, 0, 0, 0], desc: "Sorlammen luontopolku", active: false, description: "Sorlammen nature trail is a 5 km circle in the southern part of Nuuksio national park. The trail has medium difficulty level and suitable for a half day trip. There is a picnic place with a scenic view at the lake. It is possible to take a short easy part of the loop from the parking site to the picnic place."}, 
@@ -16,7 +16,7 @@ var locations = [
 
     {coord: {lat: 60.152, lng: 24.718}, activityList: [0, 0, 0, 1], desc: "Finnoon luontopolku", active: false, description: "Finnoon 1.6 km nature path is one of the best lowland birdwatching sites at close to the sea shore."},
 
-    {coord: {lat: 60.188, lng: 24.813}, activityList: [0, 1, 1, 0], desc: "Laajalahden luontopolku", active: false, description: "A wonderful walking 2.9 km long easy path connects two birdwatching towers at the shore of Laajalahti bay. A small nature center Villa Elfvik at the northern end of the trail located in impressive patch of real old-growth forest – it is hard to believe that such a wonder can be found inside the city."
+    {coord: {lat: 60.188, lng: 24.813}, activityList: [0, 1, 1, 0], desc: "Laajalahden luontopolku", active: false, description: "A wonderful walking 2.9 km long easy path connects two birdwatching towers at the shore of Laajalahti bay. A small nature center Villa Elfvik at the northern end of the trail located in impressive patch of real old-growth forest – it is hard to believe that such a wonder can be found inside the city.",
     photoCoord: {maxLat: 60.2003, minLat: 60.1877, maxLng: 24.8217, minLng: 24.8122}},
 
     ];
@@ -74,6 +74,35 @@ function initActivities() {
   }
 }
 
+function updateLocationDescription(location) {
+
+  var locHdng = $("#locationHeading");
+  locHdng.html("");
+  locHdng.html("<h2>" + location.desc + "</h2>");
+
+  var locDesc = $("#locationDescription");
+  locDesc.html("");
+  locDesc.html("<p>" + location.description + "</p>");
+
+  var locInfo = $("#locationInfo");
+  locInfo.html("");
+  var htmlStr = "";
+  for(var i = 0; i < location.activityList.length; i++) {
+    if(location.activityList[i] == 1) {
+      console.log("TRUE");
+      htmlStr = htmlStr + activities[i] + ", ";
+      console.log(htmlStr);
+    }
+  }
+  if (htmlStr != "") {
+    htmlStr = htmlStr.slice(0, (htmlStr.length - 2));
+    htmlStr = "Activities here: " + htmlStr;
+  }
+
+  htmlStr = "Address: " + location.address + "<br>" + htmlStr;
+  locInfo.html(htmlStr);
+}
+
 function getPlacePhotos(location) {
   lat = location.coord.lat;
   lng = location.coord.lng;
@@ -103,18 +132,16 @@ function getPlacePhotos(location) {
 }
 
 function displayPhotos(data, desc) {
-  //alert(JSON.stringify(data));
-  //console.log(JSON.stringify(data));
-  //console.log(JSON.stringify(data.photos));
+
+
   console.log(data.photos.length);
-  var el = $("#locationPhotos");
+  var el = $("#locationPhotoContainer");
   el.html("");
-  /*el.append('<div class="row row-content">')
-  el.append('<div class="col-lg-12"><p>These photos have been taken near ' + desc + '</p></div>');*/
+
   for (var i = 0; i < data.photos.length; i++) {
     var photo = data.photos[i]
     console.log(JSON.stringify(photo));
-    tmpEl = $('<img class="img-responsive customer-img popUpImage" src="' + photo.photo_file_url + '" alt="">').appendTo($('<div class="col-md-2 col-sm-4 col-xs-6"></div>').appendTo('#locationPhotos'));
+    tmpEl = $('<img class="img-responsive customer-img popUpImage" src="' + photo.photo_file_url + '" alt="">').appendTo($('<div class="col-md-2 col-sm-4 col-xs-6"></div>').appendTo('#locationPhotoContainer'));
     (function (photo) {
       tmpEl.on( "click", function( event ) {
         var imageCopy = $(this).clone();
@@ -136,33 +163,7 @@ function displayPhotos(data, desc) {
         });
       })
     })(photo);
-    /*tmpEl.on( "click", function( event ) {
-      var imageCopy = $(this).clone();
-      imageCopy.on( "click", function( event ) {
-        console.log(i);
-        console.log(photo.photo_url);
-        window.location.href = photo.photo_url;
-      });
-      console.log(photo.photo_url)
-      height = this.naturalHeight;
-      width = this.naturalWidth;
-      windowWidth = $(window).width();
-      windowHeight = $(window).height();
-      var x = windowWidth / 2 - width / 2;
-      var y = windowHeight / 2 - height / 2;
-      imageCopy.bPopup({
-          positionStyle: 'fixed',
-          position: [x, y],
-      });
-    })*/
 
-    //$('<a href="' + photo.photo_url + '"><img class="img-responsive customer-img popUpImage" src="' + photo.photo_file_url + '" alt=""></a>').appendTo($('<div class="col-md-2 col-sm-4 col-xs-6"></div>').appendTo('#locationPhotos'));
-
-    /*el.append('<div class="col-md-2 col-sm-4 col-xs-6"></div>');
-    el.append('<a href="' + photo.photo_url + '"><img class="img-responsive customer-img popUpImage" src="' + photo.photo_file_url + '" alt=""></a>');
-    el.append('<p>author:' + photo.owner_name + '</p>');*/
-    //el.append('</div>');
-    // TODO: PANORAMIO REQUIREMENTS
   }
   if ( $( "#panoramioEl" ).length == 0) {
     var panoramioEl = el.after("<img id='panoramioEl' class='img-responsive customer-img' src='/static/media/Logo-panoramio-google.png' alt=''></img>");
@@ -192,6 +193,7 @@ function initFilters() {
     var locCoord = new google.maps.LatLng(locLat, locLng);
     map.panTo(locCoord);
     map.setZoom(11);
+    updateLocationDescription(activeLocations[index]);
     getPlacePhotos(activeLocations[index]);
   });
 
