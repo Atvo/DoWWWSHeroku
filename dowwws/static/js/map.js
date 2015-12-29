@@ -266,12 +266,13 @@ function updateLocationList() {
   activeLocations = []
   var markerList = $("#markerList");
   markerList.html("");
+  markerList.append("List of Locations:");
   var idx = 0
   for (var i = 0; i < locations.length; i++) {
     var location = locations[i];
     if (location.active === true) {
       activeLocations[idx] = location;
-      markerList.append("<li id='locationElement" + i + "'>" + location.desc + "</li>");
+      markerList.append("<li id='locationElement" + i + "' class='locationElement'>" + location.desc + "</li>");
       idx += 1;
     }
   }
