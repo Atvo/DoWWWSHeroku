@@ -196,3 +196,10 @@ text-align: right;
   filter:         drop-shadow(5px 5px 5px #000); 
 }
 
+#locationInfo,.page-header{
+  color:#6292B2;
+}
+
+#locationHeading{
+  color:#006247;
+}
