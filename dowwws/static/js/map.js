@@ -8,15 +8,19 @@ var locations = [
     {coord: {lat: 60.220, lng: 24.865}, activityList: [0, 0, 0, 1], desc: "Strömbergin puisto", address: "Strömbergintie 2, Helsinki", active: false, description: "Strömbergin puisto is a small city park with the only real natural waterfall in Helsinki.", 
     photoCoord: {maxLat: 60.2214, minLat: 60.2185, maxLng: 24.8676, minLng: 24.8637}},
 
-    {coord: {lat: 60.258, lng: 24.603}, activityList: [0, 0, 0, 0], desc: "Sorlammen luontopolku", active: false, description: "Sorlammen nature trail is a 5 km circle in the southern part of Nuuksio national park. The trail has medium difficulty level and suitable for a half day trip. There is a picnic place with a scenic view at the lake. It is possible to take a short easy part of the loop from the parking site to the picnic place."}, 
+    {coord: {lat: 60.258, lng: 24.618}, activityList: [1, 0, 0, 0], desc: "Sorlammen luontopolku", address: "Nuuksionkuja 2, Espoo", active: false, description: "Sorlammen nature trail is a 5 km circle in the southern part of Nuuksio national park. The trail has medium difficulty level and suitable for a half day trip. There is a picnic place with a scenic view at the lake. It is possible to take a short easy part of the loop from the parking site to the picnic place.", 
+    photoCoord: {maxLat: 60.2611, minLat: 60.2521, maxLng: 24.6219, minLng: 24.6067}},
 
-    {coord: {lat: 60.294, lng: 24.558}, activityList: [1, 0, 0, 1], desc: "Päivättärenpolku", active: false, description: "This is a 1.4 km trail through a hilly terrain but on a easily accessible path located next to Haltia Finnish Nature center."},
+    {coord: {lat: 60.294, lng: 24.558}, activityList: [1, 0, 0, 1], desc: "Päivättärenpolku", address: "Nuuksiontie 84, Espoo", active: false, description: "This is a 1.4 km trail through a hilly terrain but on a easily accessible path located next to Haltia Finnish Nature center.",
+    photoCoord: {maxLat: 60.2968, minLat: 60.2939, maxLng: 24.5639, minLng: 24.5599}},
 
-    {coord: {lat: 60.242, lng: 24.656}, activityList: [0, 0, 0, 1], desc: "Oittaan luontopolku", active: false, description: "A short 1.5 km and easy path along the fields and horse stables, but it is not well marked. Some parts close to the lake are not cleared and may be difficult to find."},
+    {coord: {lat: 60.242, lng: 24.656}, activityList: [0, 0, 0, 1], desc: "Oittaan luontopolku", address: "Kunnarlantie 39, Espoo", active: false, description: "A short 1.5 km and easy path along the fields and horse stables, but it is not well marked. Some parts close to the lake are not cleared and may be difficult to find.",
+    photoCoord: {maxLat: 60.2439, minLat: 60.2388, maxLng: 24.6592, minLng: 24.6491}},
 
-    {coord: {lat: 60.152, lng: 24.718}, activityList: [0, 0, 0, 1], desc: "Finnoon luontopolku", active: false, description: "Finnoon 1.6 km nature path is one of the best lowland birdwatching sites at close to the sea shore."},
+    {coord: {lat: 60.152, lng: 24.718}, activityList: [0, 0, 0, 1], desc: "Finnoon luontopolku", address: "Hyljeluodontie 3, Espoo", active: false, description: "Finnoon 1.6 km nature path is one of the best lowland birdwatching sites at close to the sea shore.",
+    photoCoord: {maxLat: 60.1548, minLat: 60.1503, maxLng: 24.7244, minLng: 24.7133}},
 
-    {coord: {lat: 60.188, lng: 24.813}, activityList: [0, 1, 1, 0], desc: "Laajalahden luontopolku", active: false, description: "A wonderful walking 2.9 km long easy path connects two birdwatching towers at the shore of Laajalahti bay. A small nature center Villa Elfvik at the northern end of the trail located in impressive patch of real old-growth forest – it is hard to believe that such a wonder can be found inside the city.",
+    {coord: {lat: 60.188, lng: 24.813}, activityList: [0, 1, 1, 0], desc: "Laajalahden luontopolku", address: "Konemiehentie 4, Espoo", active: false, description: "A wonderful walking 2.9 km long easy path connects two birdwatching towers at the shore of Laajalahti bay. A small nature center Villa Elfvik at the northern end of the trail located in impressive patch of real old-growth forest – it is hard to believe that such a wonder can be found inside the city.",
     photoCoord: {maxLat: 60.2003, minLat: 60.1877, maxLng: 24.8217, minLng: 24.8122}},
 
     ];
