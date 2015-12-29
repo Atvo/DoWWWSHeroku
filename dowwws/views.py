@@ -16,17 +16,17 @@ from dowwws.forms import QuestionForm, ReplyForm
 OUR_EMAIL = "sittingmat@email.com"
 
 def index(request):
-	print("JOU")
+	#print("JOU")
 	context = RequestContext(request)
 	return render_to_response('index.html', context)
 
 def product(request):
-	print("Product")
+	#print("Product")
 	context = RequestContext(request)
 	return render_to_response('product.html', context)
 
 def buy(request):
-	print("Buy")
+	#print("Buy")
 	context = RequestContext(request)
 	querySet = OrderCount.objects.all()
 	querySet = querySet.filter(productName = "Sitting Mat");
@@ -41,24 +41,24 @@ def buy(request):
 	return render_to_response('product.html', context)
 
 def contact(request):
-	print("contact")
+	#print("contact")
 	context = RequestContext(request)
 	context['publishedQuestions'] = Question.objects.all().filter(isPublished=True)
 	context['form'] = QuestionForm()
-	#print(context)
+	##print(context)
 	return render_to_response('contact.html', context)
 
 def moderate(request):
-	print("moderate")
+	#print("moderate")
 	context = RequestContext(request)
 	if request.user.is_authenticated():
-		print("User is authenticated")
+		#print("User is authenticated")
 		context['approvedQuestions'] = Question.objects.all().filter(isAnswered=False)
 		context['form'] = ReplyForm()
-		#print(context)
+		##print(context)
 		return render_to_response('moderate.html', context)
 	else:
-		print("User is not authenticated")
+		#print("User is not authenticated")
 		return render_to_response('login.html', context)
 
 def loginUser(request):
@@ -67,13 +67,13 @@ def loginUser(request):
 	password = request.POST['password']
 	user = authenticate(username=username, password=password)
 	if user is not None:
-		print("User is not None")
+		#print("User is not None")
 		if user.is_active:
-			print("User is active")
+			#print("User is active")
 			login(request, user)
 			return HttpResponseRedirect('/moderate/')
 		else:
-			print("User is not active")
+			#print("User is not active")
 			return render_to_response('login.html', context)
 	else:
 		return render_to_response('login.html', context)
@@ -94,21 +94,21 @@ def logOutUser(request):
 
 
 def travelguide(request):
-	print("travelguide")
+	#print("travelguide")
 	context = RequestContext(request)
 	context["page"] = "Travel guide"
 	return render_to_response('travelguide.html', context)
 
 def newQuestion(request):
-	print("newQuestion")
+	#print("newQuestion")
 	if request.method == 'POST':
 		context = RequestContext(request)
-		print(request.POST)
+		#print(request.POST)
 		form = QuestionForm(request.POST or None)
-		print(form)
+		#print(form)
 
 		if form.is_valid():
-			print(form.cleaned_data)
+			#print(form.cleaned_data)
 			firstName = form.cleaned_data["name"]
 			#telNum = form.cleaned_data.get("name")
 			email = form.cleaned_data.get("email")
@@ -116,14 +116,14 @@ def newQuestion(request):
 			public = form.cleaned_data.get("public")
 			emailResponse = form.cleaned_data.get("emailResponse")
 			# newQuestion = form.save(commit=False)
-			# print(request)
+			# #print(request)
 			newQuestion = Question()
 			# for var in request:
-			# 	print(var)
+			# 	#print(var)
 			# serializedStr = uri_to_iri(request.POST.get('serialized'))
-			# print(serializedStr)
-			# print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
-			# print(uri_to_iri(serializedStr))
+			# #print(serializedStr)
+			# #print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
+			# #print(uri_to_iri(serializedStr))
 			# arr = serializedStr.split("&")
 			# firstName = arr[1].split("=")[1].replace("+", " ")
 			# telNum = arr[2].split("=")[1].replace("+", " ")
@@ -138,81 +138,81 @@ def newQuestion(request):
 			# 	checkboxValue = arr[5].split("=")[1].replace("+", " ")
 			# 	if arr[5].split("=")[0] == "public":
 			# 		public = "on"
-			# 		print("Public ON")
+			# 		#print("Public ON")
 			# 	else:
-			# 		print(arr[5].split("=")[0])
-			# 		print("EmailResponse ON")
+			# 		#print(arr[5].split("=")[0])
+			# 		#print("EmailResponse ON")
 			# 		emailResponse = "on"
 			# if len(arr) > 6:
 			# 	emailResponse = arr[6].split("=")[1].replace("+", " ")
 
 			newQuestion.name = firstName #request.POST.get('name')
-			print(firstName)
+			#print(firstName)
 			newQuestion.email = email #request.POST.get('email')
-			print(email)
+			#print(email)
 			newQuestion.message = question #request.POST.get('message')
-			print(question)
+			#print(question)
 			#newQuestion.title = title #request.POST.get('message')
 			newQuestion.public = public
-			print(public)
+			#print(public)
 			newQuestion.emailResponse = emailResponse
-			print(emailResponse)
-			# print(public)
-			# print(public == None)
+			#print(emailResponse)
+			# #print(public)
+			# #print(public == None)
 			# if public == None:
 			# 	newQuestion.public = False
-			# 	print("public = False")
+			# 	#print("public = False")
 
-			# print(emailResponse)
-			# print(emailResponse != None)
-			# print(emailResponse == "on")
+			# #print(emailResponse)
+			# #print(emailResponse != None)
+			# #print(emailResponse == "on")
 			# if emailResponse != None and emailResponse == "on":
 			# 	newQuestion.emailResponse = True
-			# 	print("emailResponse = True")
+			# 	#print("emailResponse = True")
 			newQuestion.save()
 			return contact(request)
 		else:
-			print("FORM NOT VALID")
-			print(form)
-			print(request.POST.get('serialized'))
+			#print("FORM NOT VALID")
+			#print(form)
+			#print(request.POST.get('serialized'))
 
 def newReply(request):
-	print("newReply")
+	#print("newReply")
 	if request.method == 'POST':
 		context = RequestContext(request)
-		print(request)
+		#print(request)
 		form = ReplyForm(request.POST or None)
-		print(form)
-		print("!!!!!!!!!!!!!")
+		#print(form)
+		#print("!!!!!!!!!!!!!")
 		for var in request:
-			print(var)
-		print("!!!!!!!!!!!!")
+			#print(var)
+		#print("!!!!!!!!!!!!")
 
 		if form.is_valid():
-			print(form.cleaned_data)
+			#print(form.cleaned_data)
 
 			serializedStr = uri_to_iri(request.POST)
-			print(serializedStr)
+			#print(serializedStr)
 			arr = serializedStr.split("&")
 			#arr = json.loads(serializedStr)
-			print("ARR")
+			#print("ARR")
 			for var in arr:
-				print(var)
-			print("END")
+				#print(var)
+			#print("END")
 			#postMessage = arr[0].split("=")[1].replace("+", " ")
 			#postMessage = arr[0][0]
 			#postMessage = arr.get("message")
 			postMessage = request.POST.get("message")
-			print(postMessage)
+			#print(postMessage)
 			#postId = arr[1].split("=")[1].replace("+", " ")
 			postId = request.POST.get("id")
-			print(postId)
+			#print(postId)
 			postTitle = form.cleaned_data.get("title")
 			#postTitle = arr[2].split("=")[1].replace("+", " ")
-			print(postTitle)
+			#print(postTitle)
 			postAnswer = form.cleaned_data.get("answer")
 			#postAnswer = arr[3].split("=")[1].replace("+", " ")
-			print(postAnswer)
+			#print(postAnswer)
 
 			public = request.POST.get("public")
 			emailResponse = request.POST.get("emailResponse")
@@ -228,8 +228,8 @@ def newReply(request):
 			# if last.split("=")[0] == "public":
 			# 	public = last.split("=")[1].replace("+", " ")
 
-			print(public)
-			print(emailResponse)
+			#print(public)
+			#print(emailResponse)
 
 			# if len(arr) > 4:
 			# 	checkboxValue = arr[4].split("=")[1].replace("+", " ")
@@ -237,17 +237,17 @@ def newReply(request):
 			# 		public = "on"
 			# 	else: 
 			# 		emailResponse = "on"
-			# 	print(public)
+			# 	#print(public)
 
 			# if len(arr) > 5:
 			# 	emailResponse = arr[5].split("=")[1].replace("+", " ")
-			# 	print(emailResponse)
+			# 	#print(emailResponse)
 
 			querySet = Question.objects.all()
 			querySet = querySet.filter(id = int(postId))
 			question = querySet[0]
-			print(len(querySet))
-			#print(str(question))
+			#print(len(querySet))
+			##print(str(question))
 			#postAnswer = request.POST.get('answer')
 			question.answer = postAnswer
 			question.title = postTitle
@@ -256,7 +256,7 @@ def newReply(request):
 				question.isPublished = True
 
 			if emailResponse != None and emailResponse == "on":
-				print("send Mail")
+				#print("send Mail")
 				send_mail('Subject here', 'Here is the message.', OUR_EMAIL,
 	    [question.email], fail_silently=False)
 
@@ -268,7 +268,7 @@ def newReply(request):
 			return moderate(request)
 
 		else:
-			print("FORM NOT VALID")
-			print(form)
-			print(request.POST.get('serialized'))
+			#print("FORM NOT VALID")
+			#print(form)
+			#print(request.POST.get('serialized'))
 
