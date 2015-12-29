@@ -32,6 +32,7 @@ var winterFilter = false;
 
 // Global Places Variables
 var service;
+var infowindow = null;
 
 function initMap() {
   console.log("initMap");
@@ -56,15 +57,20 @@ function initMap() {
     markers.push(marker);
     var dist = calculateDistance(locations[0], locations[i]);
 
-    var infowindow = new google.maps.InfoWindow();
-    var content = locations[i].desc + ", summer: " + locations[i].summer + ", winter: " + locations[i].winter;
+    var location = locations[i];
 
-    google.maps.event.addListener(marker,'click', (function(marker,content,infowindow){ 
+    google.maps.event.addListener(marker,'click', (function(marker,location){ 
         return function() {
-            infowindow.setContent(content);
+            if (infowindow) {
+                infowindow.close();
+            }
+            infowindow = new google.maps.InfoWindow();
+            infowindow.setContent(location.desc);
             infowindow.open(map,marker);
+            updateLocationDescription(location);
+            getPlacePhotos(location);
         };
-    })(marker,content,infowindow));
+    })(marker,location));
 
   };  
 }

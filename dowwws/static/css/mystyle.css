@@ -124,17 +124,20 @@ text-align: right;
 #markerList{
   list-style: circle;
 }
-.carousel {
+/*.carousel {
     background:#1A237E;
-}
-.carousel .item {
+}*/
+/*.carousel .item {
   height: 400px;
-}
-.item img {
-    position: absolute;
+}*/
+.carousel-inner > .item > img,
+.carousel-inner > .item > a > img {
+    width: 100%;
+    margin: auto;
+    /*position: absolute;
     top: 0;
     left: 0;
-    min-height: 400px;
+    margin: auto;*/
 }
 .customer-img{
   position:relative;
