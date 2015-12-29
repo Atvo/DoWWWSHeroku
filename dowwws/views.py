@@ -171,10 +171,6 @@ def newQuestion(request):
 			# 	#print("emailResponse = True")
 			newQuestion.save()
 			return contact(request)
-		else:
-			#print("FORM NOT VALID")
-			#print(form)
-			#print(request.POST.get('serialized'))
 
 def newReply(request):
 	#print("newReply")
