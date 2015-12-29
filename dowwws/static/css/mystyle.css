@@ -162,3 +162,8 @@ text-align: right;
 #locationPhotos{
     border: 10px solid red;
 }
+
+.locationElement:hover{
+  -webkit-filter: drop-shadow(5px 5px 5px #000);
+  filter:         drop-shadow(5px 5px 5px #000); 
+}
