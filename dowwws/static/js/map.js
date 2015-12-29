@@ -5,7 +5,7 @@ var activeActivities = [];
 
 var rootLatLng = {lat: 60.187, lng: 24.820};
 var locations = [
-    {coord: {lat: 60.220, lng: 24.865}, activityList: [0, 0, 0, 1], desc: "Strömbergin puisto", address: "YOLO", active: false, description: "Strömbergin puisto is a small city park with the only real natural waterfall in Helsinki.", 
+    {coord: {lat: 60.220, lng: 24.865}, activityList: [0, 0, 0, 1], desc: "Strömbergin puisto", address: "Strömbergintie 2, Helsinki", active: false, description: "Strömbergin puisto is a small city park with the only real natural waterfall in Helsinki.", 
     photoCoord: {maxLat: 60.2214, minLat: 60.2185, maxLng: 24.8676, minLng: 24.8637}},
 
     {coord: {lat: 60.258, lng: 24.603}, activityList: [0, 0, 0, 0], desc: "Sorlammen luontopolku", active: false, description: "Sorlammen nature trail is a 5 km circle in the southern part of Nuuksio national park. The trail has medium difficulty level and suitable for a half day trip. There is a picnic place with a scenic view at the lake. It is possible to take a short easy part of the loop from the parking site to the picnic place."}, 
