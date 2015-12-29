@@ -44,9 +44,23 @@ $(document).ready(function () {
 		},
 		function(data,status){
 			var message = data;
-			alert("Unfortunately you cannot buy the product at the moment. Please leave your request through the contact form and we will get in touch when the mats are available. Thank you!");
+			alert("Unfortunately you cannot buy the product at the moment. Please leave your request through the question form and we will get in touch when the mats are available. Thank you!");
 			location.reload(forceGet=true);
 		});
 	});
+
+	$( ".popUpImage" ).on( "click", function( event ) {
+		var imageCopy = $(this).clone();
+	    height = this.naturalHeight;
+	    width = this.naturalWidth;
+	    windowWidth = $(window).width();
+	    windowHeight = $(window).height();
+	    var x = windowWidth / 2 - width / 2;
+	    var y = windowHeight / 2 - height / 2;
+	    imageCopy.bPopup({
+	        positionStyle: 'fixed',
+	        position: [x, y],
+	    });
+	})
 
 });

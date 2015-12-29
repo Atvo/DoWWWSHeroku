@@ -88,12 +88,12 @@ WSGI_APPLICATION = 'hellodjango.wsgi.application'
  #       'ENGINE': 'django.db.backends.postgresql_psycopg2',
 #    }
 #}
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': 'mydatabase',
-    }
-}
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': 'mydatabase',
+#     }
+# }
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.8/topics/i18n/
@@ -112,11 +112,10 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
 
-STATIC_URL = '/static/'
-
 # Parse database configuration from $DATABASE_URL
-#import dj_database_url
-#DATABASES = {'default': dj_database_url.config(default=DATABASE_URL)}
+import dj_database_url
+DATABASES = {'default': dj_database_url.config(default=DATABASE_URL)}
+#DATABASES['default'] =  dj_database_url.config()
 
 # Honor the 'X-Forwarded-Proto' header for request.is_secure()
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
@@ -128,12 +127,15 @@ CRISPY_TEMPLATE_PACK = "bootstrap3"
 
 # Static asset configuration
 import os
-#BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-STATIC_ROOT = 'static'
-STATIC_URL = '/static/'
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')#'static'
+STATIC_URL = os.path.join(BASE_DIR, '/static/')#'/static/'
 
-STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, 'static'),
-)
+# STATICFILES_DIRS = (
+#     os.path.join(BASE_DIR, 'static'),
+# )
+
+
+STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
 print(INSTALLED_APPS)
 #reg = 42/0

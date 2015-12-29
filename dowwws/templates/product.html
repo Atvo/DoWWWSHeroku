@@ -93,12 +93,19 @@
 
         </div>
       </div>
-        <div class="col-sm-6">
-            <h2>Outdoor sitting mats</h2>
-            <p>Our product is a lightweight cushion (PE-foam mat) used for sitting outdoor in harsh environments, like wet, cold and rough surface. The cushion comes with a printed logo or name of a company, event, club etc.  Consectetur, quod, incidunt, harum nisi dolores delectus reprehenderit voluptatem perferendis dicta dolorem non blanditiis ex fugiat.</p>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Saepe, magni, aperiam vitae illum voluptatum aut sequi impedit non velit ab ea pariatur sint quidem corporis eveniet. Odit, temporibus reprehenderit dolorum!</p>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Et, consequuntur, modi mollitia corporis ipsa voluptate corrupti eum ratione ex ea praesentium quibusdam? Aut, in eum facere corrupti necessitatibus perspiciatis quis?</p>
-
+        <div class="col-sm-6">            
+            <p>The mats are produced from closed-cell PE-foam and have the following features:</p>
+            <ul>
+                <li>Soft and comfortable</li>
+                <li>Great heat insulation</li>
+                <li>The material does not absorb water</li>
+                <li>Elastic band with a buckle for carrying on your waist</li>
+                <li>Lightweight</li>
+                <li>Can be easily attached to your backpack</li>
+                <li>Many possible use applications</li>
+            </ul>              
+            <p>The cushion can be attached to the waist with a strap and this way it always stays clean and dry. One does not need to carry it around the camping site and it is always there to sit on it: just pull it down from the waist. The mat can be produced with a logo or a slogan. The mat is also a convenient gear for spectaculars of various mass outdoor events, e.g. pop concerts and sport competitions.</p>
+            <p>It can work as orginal a marketing tool, business gift, merchandising material or a group attribute of a club or company. This product will be taking care of your customers for years.</p>
             <form id="buyForm" class="form-horizontal" role="form" novalidate method="post" action="/product/buy/">
                 {% csrf_token %}
                <div class="form-group">
@@ -122,50 +129,24 @@
             <h2 class="page-header">More examples</h2>
         </div>
         <div class="col-md-2 col-sm-4 col-xs-6">
-            <img class="img-responsive customer-img" src="{% static 'media/fishing.jpg' %}" alt=""  id="image" onclick="big(this)">
+            <img class="img-responsive customer-img popUpImage" src="{% static 'media/fishing.jpg' %}" alt=""  id="image">
         </div>
         <div class="col-md-2 col-sm-4 col-xs-6">
-            <img class="img-responsive customer-img" src="{% static 'media/fire_summer_1.jpg' %}" alt="" id="image1" onclick="big1(this)">
+            <img class="img-responsive customer-img popUpImage" src="{% static 'media/fire_summer_1.jpg' %}" alt="" id="image1">
         </div>
         <div class="col-md-2 col-sm-4 col-xs-6">
-            <img class="img-responsive customer-img" src="{% static 'media/fire_summer_2.jpg' %}" alt="" id="image2" onclick="big2(this)">
+            <img class="img-responsive customer-img popUpImage" src="{% static 'media/fire_summer_2.jpg' %}" alt="" id="image2">
         </div>
         <div class="col-md-2 col-sm-4 col-xs-6">
-            <img class="img-responsive customer-img" src="{% static 'media/fire_summer_3.jpg' %}" alt="" id="image3" onclick="big3(this)">
+            <img class="img-responsive customer-img popUpImage" src="{% static 'media/fire_summer_3.jpg' %}" alt="" id="image3">
         </div>
         <div class="col-md-2 col-sm-4 col-xs-6">
-            <img class="img-responsive customer-img" src="{% static 'media/sample_3.jpg' %}" alt="" id="image4" onclick="big4(this)">
+            <img class="img-responsive customer-img popUpImage" src="{% static 'media/sample_3.jpg' %}" alt="" id="image4">
         </div>
         <div class="col-md-2 col-sm-4 col-xs-6">
-            <img class="img-responsive customer-img" src="{% static 'media/camouflage1.jpg' %}" alt="" id="image5" onclick="big5(this)">
+            <img class="img-responsive customer-img popUpImage" src="{% static 'media/camouflage1.jpg' %}" alt="" id="image5">
         </div>
     </div>
 </div>
-<script type="text/javascript">
-function big1(el){
-    var imageCopy = $('#image1').clone();
-    console.log(imageCopy);
-    imageCopy.bPopup({
-        positionStyle: 'fixed',
-    });
-}
-function big2(el){
- $('#image2').bPopup();
-}
-function big3(el){
- $('#image3').bPopup();
-}
-function big4(el){
- $('#image4').bPopup();
-}
-function big5(el){
- $('#image5').bPopup();
- }
- function big(el){
-  $('#image').bPopup();
-  }
-
-
-</script>
 
 {% endblock %}
