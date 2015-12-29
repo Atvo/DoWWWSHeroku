@@ -16,7 +16,7 @@ import os
 BASE_DIR = os.path.dirname(__file__) # this is not Django setting.
 
 #ON HEROKU
-DATABASE_URL = 'postgresql:///postgresql'
+#DATABASE_URL = 'postgresql:///postgresql'
 
 
 # TEMPLATE_DIRS = (
@@ -124,7 +124,7 @@ import dj_database_url
 #ON HEROKU
 import os
 if os.getcwd() == "/app":
-    DATABASES = {'default': dj_database_url.config(default='postgres://localhost')}
+    DATABASES['default'] =  dj_database_url.config()
 
 # Honor the 'X-Forwarded-Proto' header for request.is_secure()
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
