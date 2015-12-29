@@ -16,13 +16,7 @@ body {
     font-family: 'Arimo', Verdana, sans-serif;
 }
 
-p {
-    font-size: 14pt;
-}
 
-ul {
-    font-size: 14pt;
-}
 
 
 .menu-text {
@@ -145,13 +139,10 @@ text-align: right;
 .customer-img{
   position:relative;
 }
-.row-footer,address{
+.row-footer{
   background-color: #292c2f;
-  box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.12);
-  box-sizing: border-box;
-  width: 100%;
   
-  font: normal 18px sans-serif;
+  width: 100%;
 
   padding: 0px 0px 50px 0px;
   margin:0px auto;
