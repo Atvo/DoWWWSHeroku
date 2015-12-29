@@ -18,11 +18,13 @@ OUR_EMAIL = "sittingmat@email.com"
 def index(request):
 	#print("JOU")
 	context = RequestContext(request)
+	context["page"] = "Home"
 	return render_to_response('index.html', context)
 
 def product(request):
 	#print("Product")
 	context = RequestContext(request)
+	context["page"] = "Product"
 	return render_to_response('product.html', context)
 
 def buy(request):
@@ -43,6 +45,7 @@ def buy(request):
 def contact(request):
 	#print("contact")
 	context = RequestContext(request)
+	context["page"] = "contact"
 	context['publishedQuestions'] = Question.objects.all().filter(isPublished=True)
 	context['form'] = QuestionForm()
 	##print(context)

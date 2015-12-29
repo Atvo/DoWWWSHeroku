@@ -57,17 +57,30 @@
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right menu-text menu-link">
                      <li>
+                        {% if page == "Home" %}
+                        <a href="/index/" style="font-weight: bold ;text-decoration:underline">Home</a>
+                        {% else %}
                         <a href="/index/">Home</a>
+                        {% endif %}
                     </li>
                     <li>
+                        {% if page == "Product" %}
+                        <a href="/product/" style="font-weight: bold ;text-decoration:underline">Product</a>
+                        {% else %}
                         <a href="/product/">Product</a>
+                        {% endif %}
                     </li>
                     <li>
+                        {% if page == "contact" %}
+                        <a href="/contact/" style="font-weight: bold ;text-decoration:underline">Q&A</a>
+                        {% else %}
                         <a href="/contact/">Q&A</a>
+                        {% endif %}
+
                     </li>
                     <li>
                         {% if page == "Travel guide" %}
-                        <a href="/travelguide/" style="font-weight: bold">Travel guide</a>
+                        <a href="/travelguide/" style="font-weight: bold;;text-decoration:underline">Travel guide</a>
                         {% else %}
                         <a href="/travelguide/">Travel guide</a>
                         {% endif %}

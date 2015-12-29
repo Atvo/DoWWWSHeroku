@@ -94,12 +94,12 @@ WSGI_APPLICATION = 'hellodjango.wsgi.application'
 #}
 
 # ON LOCAL
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': 'mydatabase',
-#     }
-# }
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+         'NAME': 'mydatabase',
+     }
+ }
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.8/topics/i18n/
