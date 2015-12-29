@@ -87,11 +87,11 @@ WSGI_APPLICATION = 'hellodjango.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.8/ref/settings/#databases
 
-DATABASES = {
-   'default': {
-       'ENGINE': 'django.db.backends.postgresql_psycopg2',
-   }
-}
+#DATABASES = {
+ #   'default': {
+ #       'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#    }
+#}
 
 # ON LOCAL
 # DATABASES = {
@@ -122,7 +122,9 @@ USE_TZ = True
 import dj_database_url
 
 #ON HEROKU
-DATABASES = {'default': dj_database_url.config(default=DATABASE_URL)}
+import os
+if os.getcwd() == "/app":
+    DATABASES = {'default': dj_database_url.config(default='postgres://localhost')}
 
 # Honor the 'X-Forwarded-Proto' header for request.is_secure()
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
