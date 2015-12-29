@@ -245,8 +245,7 @@ def newReply(request):
 
 			if emailResponse != None and emailResponse == "on":
 				#print("send Mail")
-				send_mail('Subject here', 'Here is the message.', OUR_EMAIL,
-	    [question.email], fail_silently=False)
+				send_mail('Subject here', 'Here is the message.', OUR_EMAIL, [question.email], fail_silently=False)
 
 
 				#send_mail('Subject here', 'Here is the message.', 'from@example.com',
