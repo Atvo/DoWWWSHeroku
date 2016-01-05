@@ -23,6 +23,10 @@ var locations = [
     {coord: {lat: 60.188, lng: 24.813}, activityList: [0, 1, 1, 0], desc: "Laajalahden luontopolku", address: "Konemiehentie 4, Espoo", active: false, description: "A wonderful walking 2.9 km long easy path connects two birdwatching towers at the shore of Laajalahti bay. A small nature center Villa Elfvik at the northern end of the trail located in impressive patch of real old-growth forest – it is hard to believe that such a wonder can be found inside the city.",
     photoCoord: {maxLat: 60.2003, minLat: 60.1877, maxLng: 24.8217, minLng: 24.8122}},
 
+    {coord: {lat: 60.187, lng: 24.694}, activityList: [1, 0, 1, 1], desc: "Espoon keskuspuisto", address: "Kylänvanhimmanpiha, Espoo", active: false, description: "Central park of Espoo. A large area of forests, meadows and rocks. There is a small café Akilleksen maja at the southern edge of the park."},
+
+    {coord: {lat: 60.187, lng: 24.694}, activityList: [1, 0, 1, 1], desc: "Helsingin keskuspuisto", address: "Metsäläntie 9, Helsinki", active: false, description: "Central park of Helsinki. An impressive mass of old-growth forests just a short distance from the centre of the city."},
+
     ];
 var activeLocations = []
 var map;
